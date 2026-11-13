@@ -1,0 +1,1740 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<title>Catatan Tumbuh Kembang</title>
+<style>
+:root, .paper{
+  --bg:#f6f4ef; --surface:#ffffff; --surface-2:#f1eee7; --text:#1f2a28; --muted:#5d6966; --border:#e3ded4;
+  --primary:#2e7d6b; --primary-2:#22604f; --primary-soft:#e2f1eb; --on-primary:#ffffff; --accent:#cf6d45;
+  --ok:#2b7a4b; --ok-bg:#e3f2e7; --warn:#8f5c00; --warn-bg:#fbefd4; --bad:#b0362e; --bad-bg:#fbe3df; --info:#2d5b97; --info-bg:#e2ebf7;
+  --band-ok:rgba(43,122,75,.13); --band-warn:rgba(214,146,34,.17); --pt:#cf6d45; --grid:#e8e4db;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(30,40,35,.05);
+}
+:root{color-scheme:light}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#131816; --surface:#1b2220; --surface-2:#232b29; --text:#e6ece9; --muted:#9ba7a3; --border:#2e3835;
+    --primary:#5cbfa5; --primary-2:#86d4bf; --primary-soft:#1d3832; --on-primary:#0c1b17; --accent:#f0956e;
+    --ok:#80d39c; --ok-bg:#1b3325; --warn:#f0c46e; --warn-bg:#3a2e15; --bad:#f29d93; --bad-bg:#3d211f; --info:#98bbee; --info-bg:#1d2b3f;
+    --band-ok:rgba(128,211,156,.13); --band-warn:rgba(240,196,110,.14); --pt:#f0956e; --grid:#29322f;
+    --shadow:0 1px 2px rgba(0,0,0,.3); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131816; --surface:#1b2220; --surface-2:#232b29; --text:#e6ece9; --muted:#9ba7a3; --border:#2e3835;
+  --primary:#5cbfa5; --primary-2:#86d4bf; --primary-soft:#1d3832; --on-primary:#0c1b17; --accent:#f0956e;
+  --ok:#80d39c; --ok-bg:#1b3325; --warn:#f0c46e; --warn-bg:#3a2e15; --bad:#f29d93; --bad-bg:#3d211f; --info:#98bbee; --info-bg:#1d2b3f;
+  --band-ok:rgba(128,211,156,.13); --band-warn:rgba(240,196,110,.14); --pt:#f0956e; --grid:#29322f;
+  --shadow:0 1px 2px rgba(0,0,0,.3); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;line-height:1.25;font-weight:650}
+h2{font-size:1.35rem} h3{font-size:1.05rem}
+p{margin:0}
+.muted{color:var(--muted)} .small{font-size:.85rem} .tiny{font-size:.78rem}
+[hidden]{display:none!important}
+button,input,select,textarea{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-weight:550;white-space:nowrap;text-decoration:none;color:var(--text)}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.btn.primary:hover{background:var(--primary-2)}
+.btn.danger{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 40%,var(--border))}
+.btn.ghost{border-color:transparent;background:none}
+.btn.sm{padding:6px 11px;font-size:.85rem;border-radius:8px}
+.btn:focus-visible,.navbtn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+input[type=text],input[type=password],input[type=number],input[type=date],select,textarea{width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface);min-width:0}
+textarea{min-height:90px;resize:vertical}
+label.f{display:flex;flex-direction:column;gap:5px;font-size:.88rem;color:var(--muted);font-weight:500}
+label.f > span{color:var(--text)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.spread{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.stack{display:flex;flex-direction:column;gap:18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.form-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+@media(max-width:1000px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:1fr}}
+@media(max-width:700px){.g2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow);min-width:0}
+.card > h3{margin-bottom:12px}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+
+/* Layout */
+#app{display:grid;grid-template-columns:236px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;padding:20px 12px;border-right:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;gap:3px}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 10px 18px}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:var(--primary);color:var(--on-primary);display:grid;place-items:center}
+.brand b{display:block;font-size:.98rem}
+.navbtn{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;border:0;background:none;color:var(--muted);cursor:pointer;text-align:left;font-weight:500;position:relative}
+.navbtn:hover{background:var(--surface-2);color:var(--text)}
+.navbtn[aria-current=page]{background:var(--primary-soft);color:var(--primary-2);font-weight:650}
+.navbtn .dot{position:absolute;top:8px;left:26px;width:8px;height:8px;border-radius:50%;background:var(--bad);border:2px solid var(--surface)}
+.side-foot{margin-top:auto;padding:12px 10px 0;border-top:1px solid var(--border)}
+.ic{display:inline-flex;flex:none}
+main{min-width:0;padding:26px clamp(16px,3vw,40px) 60px;max-width:1200px;width:100%}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.topbar h1{font-size:1.55rem}
+@media(max-width:860px){
+  #app{grid-template-columns:minmax(0,1fr)}
+  .side{position:fixed;inset:auto 0 0 0;height:auto;flex-direction:row;padding:4px 4px calc(4px + env(safe-area-inset-bottom));border-right:0;border-top:1px solid var(--border);z-index:30;gap:0}
+  .brand,.side-foot{display:none}
+  .navbtn{flex:1;flex-direction:column;gap:1px;font-size:10.5px;padding:7px 2px;align-items:center;text-align:center;min-width:0}
+  .navbtn .dot{left:calc(50% + 4px);top:5px}
+  main{padding:16px 16px 100px}
+  .topbar h1{font-size:1.3rem}
+}
+
+/* Pills & alerts */
+.pill{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:999px;font-size:.78rem;font-weight:600;white-space:nowrap;background:var(--surface-2);color:var(--muted)}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.warn{background:var(--warn-bg);color:var(--warn)} .pill.bad{background:var(--bad-bg);color:var(--bad)} .pill.info{background:var(--info-bg);color:var(--info)}
+.alert{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;border:1px solid transparent;cursor:pointer;text-align:left;width:100%;background:none}
+.alert.bad{background:var(--bad-bg)} .alert.warn{background:var(--warn-bg)} .alert.info{background:var(--info-bg)}
+.alert .bar{width:4px;align-self:stretch;border-radius:4px;flex:none}
+.alert.bad .bar{background:var(--bad)} .alert.warn .bar{background:var(--warn)} .alert.info .bar{background:var(--info)}
+.alert b{display:block;font-weight:650}
+.alerts{display:flex;flex-direction:column;gap:8px}
+
+/* Dashboard */
+.hero{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.avatar{width:76px;height:76px;border-radius:50%;background:var(--primary-soft);color:var(--primary-2);display:grid;place-items:center;font-size:1.9rem;font-weight:700;overflow:hidden;flex:none}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.hero-main{flex:1;min-width:200px}
+.hero-main h2{font-size:1.6rem}
+.tile{display:flex;flex-direction:column;gap:6px}
+.tile .lbl{font-size:.82rem;color:var(--muted);font-weight:550;text-transform:uppercase;letter-spacing:.04em}
+.tile .val{font-size:1.9rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.tile .val small{font-size:1rem;font-weight:550;color:var(--muted);margin-left:3px}
+.progress{height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+.progress > i{display:block;height:100%;background:var(--primary);border-radius:99px}
+.list{display:flex;flex-direction:column}
+.list > .li{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);align-items:center}
+.list > .li:last-child{border-bottom:0}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.thumbs .ph{aspect-ratio:1}
+
+/* Chart */
+.chart{width:100%;height:auto;display:block}
+.chart .grid{stroke:var(--grid);stroke-width:1}
+.chart .tick{fill:var(--muted);font-size:11px}
+.chart .axl{fill:var(--muted);font-size:11.5px;font-weight:600}
+.chart .band-ok{fill:var(--band-ok)} .chart .band-warn{fill:var(--band-warn)}
+.chart .zl{fill:none;stroke:var(--muted);stroke-width:1}
+.chart .zl.z0{stroke:var(--ok);stroke-width:1.8}
+.chart .zl.z2{stroke-dasharray:5 4;opacity:.8}
+.chart .zl.z3{stroke-dasharray:2 4;opacity:.7}
+.chart .zlab{fill:var(--muted);font-size:10.5px}
+.chart .today{stroke:var(--primary);stroke-dasharray:3 3;stroke-width:1.2}
+.chart .todaylab{fill:var(--primary);font-size:10.5px;font-weight:600}
+.chart .pline{fill:none;stroke:var(--pt);stroke-width:2.4;stroke-linejoin:round}
+.chart .pt{fill:var(--pt);stroke:var(--surface);stroke-width:2}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:10px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:none;padding:5px 11px;border-radius:8px;cursor:pointer;font-size:.85rem;color:var(--muted);font-weight:550}
+.seg button[aria-pressed=true]{background:var(--surface);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+
+/* Table */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{padding:9px 8px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600;white-space:nowrap}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* Milestones */
+details.stage{border:1px solid var(--border);border-radius:14px;background:var(--surface);overflow:hidden}
+details.stage + details.stage{margin-top:10px}
+details.stage > summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:center}
+details.stage > summary::-webkit-details-marker{display:none}
+details.stage[open] > summary{border-bottom:1px solid var(--border)}
+details.stage.current{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary)}
+.stage .progress{grid-column:1/-1}
+.ms-item{display:flex;gap:12px;align-items:flex-start;padding:11px 16px;border-bottom:1px solid var(--border);cursor:pointer}
+.ms-item:last-child{border-bottom:0}
+.ms-item input{width:19px;height:19px;margin-top:2px;accent-color:var(--primary);flex:none}
+.ms-item .txt{flex:1;min-width:0}
+.ms-item.done .t{color:var(--muted)}
+.cat{font-size:.72rem;font-weight:650;padding:1px 7px;border-radius:6px;margin-right:6px}
+.cat.mk{background:#e5effa;color:#2c5a92} .cat.mh{background:#f3e8f8;color:#7a3b93} .cat.bh{background:#fdeedd;color:#9a5410} .cat.so{background:#e3f3ea;color:#2a7046} .cat.kg{background:#f4f1d8;color:#6c6411}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cat{filter:brightness(.8) saturate(1.2)}}
+
+/* Imm */
+.imm-group{padding:12px 0;border-bottom:1px solid var(--border)}
+.imm-group:last-child{border-bottom:0}
+.imm-group h4{font-size:.9rem;margin-bottom:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.imm-item{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center;padding:7px 0}
+.imm-item input[type=checkbox]{width:19px;height:19px;accent-color:var(--primary)}
+.imm-item .meta{grid-column:2/-1;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.imm-item input[type=date]{width:auto;padding:4px 8px;font-size:.85rem}
+
+/* Gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.ph{position:relative;border-radius:12px;overflow:hidden;background:var(--surface-2);aspect-ratio:1;border:0;padding:0;cursor:pointer;display:block;width:100%}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .cap{position:absolute;left:0;right:0;bottom:0;padding:16px 8px 6px;background:linear-gradient(transparent,rgba(0,0,0,.6));color:#fff;font-size:.75rem;text-align:left}
+.dropzone{border:2px dashed var(--border);border-radius:14px;padding:22px;text-align:center;color:var(--muted)}
+.dropzone.over{border-color:var(--primary);background:var(--primary-soft)}
+
+/* Timeline & photo links */
+.clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:340px}
+.mini-ph{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.mini-ph .ph{width:42px;height:42px;border-radius:8px;flex:none}
+.add-ph{width:42px;height:42px;border-radius:8px;border:1.5px dashed var(--border);background:none;color:var(--muted);cursor:pointer;display:grid;place-items:center;flex:none}
+.add-ph:hover{border-color:var(--primary);color:var(--primary)}
+.tl{display:flex;flex-direction:column;gap:14px;position:relative}
+.tl-item{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:16px}
+@media(max-width:640px){.tl-item{grid-template-columns:1fr}}
+.tl-photos{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;align-content:start}
+.tl-photos .ph:first-child:last-child{grid-column:1/-1}
+.tl-photos .add-ph{width:100%;height:auto;aspect-ratio:1}
+.tl-photos .ph:first-child:last-child + .add-ph,.tl-photos > .add-ph:only-child{grid-column:1/-1;aspect-ratio:2}
+.tl-note{white-space:pre-wrap;font-size:.92rem}
+.tl-photos .cap{display:none}
+.chart-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.file-pick{display:flex;flex-direction:column;gap:6px;padding:12px;border:1px dashed var(--border);border-radius:12px}
+
+/* Gate */
+#gate{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+.gate-card{width:100%;max-width:520px}
+.gate-card .brand{padding:0 0 16px}
+.secure-note{display:flex;gap:10px;padding:12px;border-radius:12px;background:var(--primary-soft);color:var(--primary-2);font-size:.86rem;align-items:flex-start}
+
+/* Dialog / toast */
+dialog.modal{border:1px solid var(--border);border-radius:18px;padding:0;background:var(--surface);color:var(--text);width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 40px);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+dialog.modal.wide{width:min(900px,calc(100vw - 32px))}
+dialog::backdrop{background:rgba(10,15,13,.5)}
+dialog form{display:flex;flex-direction:column;max-height:calc(100vh - 42px)}
+.m-head{padding:16px 20px;border-bottom:1px solid var(--border)}
+.m-body{padding:18px 20px;overflow:auto;display:flex;flex-direction:column;gap:12px}
+.m-foot{padding:12px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.m-foot .left{margin-right:auto}
+.lb-img{width:100%;max-height:60vh;object-fit:contain;border-radius:10px;background:var(--surface-2)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 18px;border-radius:12px;font-weight:550;z-index:100;box-shadow:0 8px 30px rgba(0,0,0,.25);max-width:calc(100vw - 32px)}
+@media(max-width:860px){.toast{bottom:84px}}
+
+/* Report */
+.paper{background:#fff;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:32px;font-size:13.5px;color-scheme:light}
+.paper h1{font-size:1.4rem} .paper h2{font-size:1.05rem;margin:22px 0 8px;padding-bottom:4px;border-bottom:2px solid var(--primary)}
+.paper table{font-size:12.5px} .paper th,.paper td{padding:5px 6px}
+.paper .kv td:first-child{color:var(--muted);width:38%}
+.rp-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid var(--border);padding-bottom:12px}
+.rp-charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.paper{padding:16px}.rp-charts{grid-template-columns:1fr}}
+#print-root{display:none}
+@media print{
+  #app,#gate,.toast,dialog{display:none!important}
+  #print-root{display:block}
+  body{background:#fff}
+  @page{size:A4;margin:13mm}
+  .paper{border:0;padding:0;border-radius:0}
+  .paper h2,.pb{break-after:avoid}
+  tr,.rp-charts,.avoid{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div id="gate" hidden></div>
+<div id="app" hidden>
+  <nav class="side" id="nav" aria-label="Menu utama"></nav>
+  <main>
+    <div class="topbar">
+      <div><h1 id="page-title"></h1><p class="muted small" id="page-sub"></p></div>
+      <div class="row">
+        <button class="btn sm" id="lock-btn" type="button" title="Kunci sekarang"></button>
+      </div>
+    </div>
+    <div id="view"></div>
+  </main>
+</div>
+<div id="print-root"></div>
+<script type="module">
+'use strict';
+/* =========================================================
+   Catatan Tumbuh Kembang — aplikasi lokal, terenkripsi.
+   Semua data disimpan di IndexedDB perangkat ini, dienkripsi
+   AES-256-GCM dengan kunci turunan PBKDF2-SHA256 dari kata sandi.
+   Tidak ada data yang dikirim ke server mana pun.
+   ========================================================= */
+
+// ---------- Utilitas ----------
+const $ = (s, r = document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === 'class') e.className = v;
+    else if (k.startsWith('on') && typeof v === 'function') e.addEventListener(k.slice(2), v);
+    else if (k === 'html') e.innerHTML = v; // hanya untuk markup statis/aman
+    else if (k === 'value') e.value = v;
+    else e.setAttribute(k, v === true ? '' : v);
+  }
+  for (const c of kids.flat(Infinity)) {
+    if (c == null || c === false) continue;
+    e.append(c.nodeType ? c : String(c));
+  }
+  return e;
+}
+const pad = n => String(n).padStart(2, '0');
+const toISO = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const parseISO = s => { const [y, m, d] = String(s).split('-').map(Number); return new Date(y, m - 1, d); };
+const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+const DAY = 86400000;
+const daysBetween = (a, b) => Math.round((b - a) / DAY);
+function addMonths(d, n) {
+  const r = new Date(d.getFullYear(), d.getMonth() + n, 1);
+  const last = new Date(r.getFullYear(), r.getMonth() + 1, 0).getDate();
+  r.setDate(Math.min(d.getDate(), last));
+  return r;
+}
+const ageMonths = (dob, date) => daysBetween(dob, date) / 30.4375;
+function ageParts(dob, date) {
+  let y = date.getFullYear() - dob.getFullYear(), m = date.getMonth() - dob.getMonth(), d = date.getDate() - dob.getDate();
+  if (d < 0) { m--; d += new Date(date.getFullYear(), date.getMonth(), 0).getDate(); }
+  if (m < 0) { y--; m += 12; }
+  return { y, m, d };
+}
+function ageText(dob, date, short) {
+  if (date < dob) return 'sebelum lahir';
+  const { y, m, d } = ageParts(dob, date), p = [];
+  if (y) p.push(y + (short ? ' th' : ' tahun'));
+  if (m || y) p.push(m + (short ? ' bl' : ' bulan'));
+  if (!short || !y) p.push(d + (short ? ' hr' : ' hari'));
+  return p.join(' ');
+}
+const fmtD = d => d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+const fmtDate = s => s ? fmtD(parseISO(s)) : '—';
+const fmtNum = (v, dg = 1) => Number(v).toLocaleString('id-ID', { maximumFractionDigits: dg });
+const fmtZ = z => (z >= 0 ? '+' : '−') + Math.abs(z).toFixed(1).replace('.', ',');
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+function toB64(u8) { let s = ''; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); }
+function fromB64(b) { const s = atob(b), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u; }
+function download(name, data, type) {
+  if (typeof MODE !== 'undefined' && MODE.cloud) {
+    if (!MODE.downloads) { toast('Unduhan tidak tersedia di tampilan ini'); return; }
+    MODE.downloads.save({ filename: name, data: data instanceof Blob ? data : new Blob([data], { type }) })
+      .catch(e => { if (e && e.code !== 'declined') toast('Unduhan gagal: ' + (e.message || e.code)); });
+    return;
+  }
+  const url = URL.createObjectURL(data instanceof Blob ? data : new Blob([data], { type }));
+  const a = h('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'anak';
+
+const ICONS = {
+  home: 'M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
+  growth: 'M3 20h18M6 16v-4M11 16V8M16 16v-6M20 5l-5 4-4-2-6 4',
+  flag: 'M5 21V4M5 4h11l-2 4 2 4H5',
+  shield: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4',
+  photo: 'M4 7h3l2-3h6l2 3h3v13H4zM15.5 13.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 1 1 7 0',
+  report: 'M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6',
+  gear: 'M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1M17 6a2 2 0 1 1-4 0 2 2 0 1 1 4 0M11 12a2 2 0 1 1-4 0 2 2 0 1 1 4 0M19 18a2 2 0 1 1-4 0 2 2 0 1 1 4 0',
+  lock: 'M6 11h12v10H6zM8 11V7a4 4 0 0 1 8 0v4',
+  plus: 'M12 5v14M5 12h14',
+  down: 'M12 4v11M7 10l5 5 5-5M5 20h14',
+  up: 'M12 20V9M7 14l5-5 5 5M5 4h14',
+  bell: 'M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0',
+  trash: 'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13',
+  print: 'M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z',
+  cal: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4',
+  sprout: 'M12 21v-9M12 12C12 7 8 5 4 5c0 4 3 7 8 7zM12 14c0-4 3-6 8-6 0 4-3 6-8 6z'
+};
+function icon(n, size = 20) {
+  const s = document.createElement('span'); s.className = 'ic';
+  s.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICONS[n]}"/></svg>`;
+  return s;
+}
+
+// ---------- Penyimpanan (IndexedDB) ----------
+const DB = {
+  db: null,
+  open() {
+    return new Promise((res, rej) => {
+      const r = indexedDB.open('tumbuh-kembang-v1', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('kv');
+      r.onsuccess = () => { this.db = r.result; res(); };
+      r.onerror = () => rej(r.error);
+    });
+  },
+  tx(mode, fn) {
+    return new Promise((res, rej) => {
+      const t = this.db.transaction('kv', mode), q = fn(t.objectStore('kv'));
+      t.oncomplete = () => res(q && q.result);
+      t.onerror = () => rej(t.error); t.onabort = () => rej(t.error);
+    });
+  },
+  get(k) { return this.tx('readonly', s => s.get(k)); },
+  set(k, v) { return this.tx('readwrite', s => s.put(v, k)); },
+  del(k) { return this.tx('readwrite', s => s.delete(k)); },
+  keys() { return this.tx('readonly', s => s.getAllKeys()); },
+  putMany(obj, clearFirst) { return this.tx('readwrite', s => { if (clearFirst) s.clear(); for (const [k, v] of Object.entries(obj)) s.put(v, k); }); },
+  clear() { return this.tx('readwrite', s => s.clear()); }
+};
+
+// ---------- Kriptografi (Web Crypto) ----------
+const te = new TextEncoder(), td = new TextDecoder();
+const ITER = 310000;
+async function deriveKey(pass, salt, iter = ITER) {
+  const base = await crypto.subtle.importKey('raw', te.encode(pass), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+}
+async function encBytes(key, bytes) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  return { iv, ct: new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, bytes)) };
+}
+async function decBytes(key, rec) { return new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: rec.iv }, key, rec.ct)); }
+const decJSON = async (key, rec) => JSON.parse(td.decode(await decBytes(key, rec)));
+
+// ---------- Brankas lokal (IndexedDB, terenkripsi) ----------
+const MODE = { cloud: false, db: null, assets: null, user: null, downloads: null, canWrite: true, isOwner: true };
+const LOCAL_PREFS = 'tk-prefs';
+const readPrefs = () => { try { return JSON.parse(localStorage.getItem(LOCAL_PREFS) || '{}'); } catch (e) { return {}; } };
+const writePrefs = o => { try { localStorage.setItem(LOCAL_PREFS, JSON.stringify(o)); } catch (e) {} };
+const LocalVault = {
+  async init() { await DB.open(); },
+  async getMeta() { return DB.get('meta'); },
+  async load(k) { return decJSON(k, await DB.get('state')); },
+  async save(k, st) { await DB.set('state', await encBytes(k, te.encode(JSON.stringify(st)))); },
+  async putPhoto(k, id, big, th) { await DB.putMany({ ['img:' + id]: await encBytes(k, big), ['th:' + id]: await encBytes(k, th) }); return {}; },
+  async getPhoto(k, p, full) { const rec = await DB.get((full ? 'img:' : 'th:') + p.id); return rec ? decBytes(k, rec) : null; },
+  async delPhoto(p) { await DB.del('img:' + p.id); await DB.del('th:' + p.id); },
+  async rebuild(k, meta, st, photos) {
+    const recs = { meta, state: await encBytes(k, te.encode(JSON.stringify(st))) };
+    for (const [p, big, th] of photos) { recs['img:' + p.id] = await encBytes(k, big); recs['th:' + p.id] = await encBytes(k, th); }
+    await DB.putMany(recs, true);
+  },
+  async wipe() { await DB.clear(); },
+  subscribe() {}
+};
+let Vault = LocalVault;
+// Kumpulkan byte foto (sudah didekripsi) untuk ganti sandi / pulihkan backup
+async function collectPhotos(st, src) {
+  const out = [];
+  for (const p of st.photos) { try { const big = await src(p, true), th = await src(p, false); if (big && th) out.push([p, big, th]); } catch (e) {} }
+  st.photos = out.map(x => x[0]);
+  return out;
+}
+
+// ---------- Referensi WHO Child Growth Standards (pendekatan) ----------
+// Median per bulan dan sebaran (S untuk tinggi; rasio -2SD/+2SD untuk berat), diinterpolasi linear.
+const WHO = {
+  L: {
+    hM: {0:49.9,1:54.7,2:58.4,3:61.4,4:63.9,5:65.9,6:67.6,7:69.2,8:70.6,9:72.0,10:73.3,11:74.5,12:75.7,13:76.9,14:78.0,15:79.1,16:80.2,17:81.2,18:82.3,19:83.2,20:84.2,21:85.1,22:86.0,23:86.9,24:87.1,25:88.0,26:88.8,27:89.6,28:90.4,29:91.2,30:91.9,31:92.7,32:93.4,33:94.1,34:94.8,35:95.4,36:96.1,42:99.9,48:103.3,54:106.7,60:110.0},
+    hS: {0:.0380,6:.0318,12:.0310,18:.0328,24:.0350,36:.0385,48:.0407,60:.0423},
+    wM: {0:3.3,1:4.5,2:5.6,3:6.4,4:7.0,5:7.5,6:7.9,7:8.3,8:8.6,9:8.9,10:9.2,11:9.4,12:9.6,13:9.9,14:10.1,15:10.3,16:10.5,17:10.7,18:10.9,19:11.1,20:11.3,21:11.5,22:11.8,23:12.0,24:12.2,25:12.4,26:12.5,27:12.7,28:12.9,29:13.1,30:13.3,31:13.5,32:13.7,33:13.8,34:14.0,35:14.2,36:14.3,42:15.3,48:16.3,54:17.3,60:18.3},
+    wLo: {0:.758,6:.810,12:.802,24:.795,36:.790,48:.779,60:.770},
+    wHi: {0:1.333,6:1.241,12:1.250,24:1.254,36:1.280,48:1.300,60:1.322},
+    cM: {0:34.5,1:37.3,2:39.1,3:40.5,4:41.6,5:42.6,6:43.3,7:44.0,8:44.5,9:45.0,10:45.4,11:45.8,12:46.1,15:46.8,18:47.4,21:47.9,24:48.3,30:49.0,36:49.5,42:50.0,48:50.4,54:50.8,60:51.1},
+    cS: {0:.0369,3:.0300,6:.0287,12:.0277,24:.0280,36:.0285,60:.0293}
+  },
+  P: {
+    hM: {0:49.1,1:53.7,2:57.1,3:59.8,4:62.1,5:64.0,6:65.7,7:67.3,8:68.7,9:70.1,10:71.5,11:72.8,12:74.0,13:75.2,14:76.4,15:77.5,16:78.6,17:79.7,18:80.7,19:81.7,20:82.7,21:83.7,22:84.6,23:85.5,24:85.7,25:86.6,26:87.4,27:88.3,28:89.1,29:89.9,30:90.7,31:91.4,32:92.2,33:92.9,34:93.6,35:94.4,36:95.1,42:99.0,48:102.7,54:106.2,60:109.4},
+    hS: {0:.0377,6:.0342,12:.0345,18:.0359,24:.0365,36:.0405,48:.0419,60:.0434},
+    wM: {0:3.2,1:4.2,2:5.1,3:5.8,4:6.4,5:6.9,6:7.3,7:7.6,8:7.9,9:8.2,10:8.5,11:8.7,12:8.9,13:9.2,14:9.4,15:9.6,16:9.8,17:10.0,18:10.2,19:10.4,20:10.6,21:10.9,22:11.1,23:11.3,24:11.5,25:11.7,26:11.9,27:12.1,28:12.3,29:12.5,30:12.7,31:12.9,32:13.1,33:13.3,34:13.5,35:13.7,36:13.9,42:15.0,48:16.1,54:17.2,60:18.2},
+    wLo: {0:.750,6:.781,12:.787,24:.783,36:.777,48:.764,60:.753},
+    wHi: {0:1.3125,6:1.274,12:1.292,24:1.287,36:1.302,48:1.335,60:1.368},
+    cM: {0:33.9,1:36.5,2:38.3,3:39.5,4:40.6,5:41.5,6:42.2,7:42.8,8:43.4,9:43.8,10:44.2,11:44.6,12:44.9,15:45.7,18:46.2,21:46.7,24:47.2,30:47.9,36:48.5,42:49.0,48:49.3,54:49.7,60:50.1},
+    cS: {0:.0350,3:.0310,6:.0300,12:.0298,24:.0300,36:.0305,60:.0310}
+  }
+};
+for (const sx of Object.values(WHO)) for (const k of Object.keys(sx)) { const t = sx[k]; t._k = Object.keys(t).filter(x => x !== '_k').map(Number).sort((a, b) => a - b); }
+function interp(t, m) {
+  const ks = t._k;
+  if (m <= ks[0]) return t[ks[0]];
+  if (m >= ks[ks.length - 1]) return t[ks[ks.length - 1]];
+  for (let i = 1; i < ks.length; i++) if (m <= ks[i]) { const a = ks[i - 1], b = ks[i]; return t[a] + (t[b] - t[a]) * (m - a) / (b - a); }
+}
+const ref = {
+  h(sx, m, z = 0) { const M = interp(WHO[sx].hM, m), S = interp(WHO[sx].hS, m); return M * (1 + z * S); },
+  w(sx, m, z = 0) { const M = interp(WHO[sx].wM, m), lo = M * (1 - interp(WHO[sx].wLo, m)) / 2, hi = M * (interp(WHO[sx].wHi, m) - 1) / 2; return z < 0 ? M + z * lo : M + z * hi; },
+  hz(sx, m, x) { const M = interp(WHO[sx].hM, m), S = interp(WHO[sx].hS, m); return (x / M - 1) / S; },
+  wz(sx, m, x) { const M = interp(WHO[sx].wM, m), lo = M * (1 - interp(WHO[sx].wLo, m)) / 2, hi = M * (interp(WHO[sx].wHi, m) - 1) / 2; return x < M ? (x - M) / lo : (x - M) / hi; },
+  c(sx, m, z = 0) { const M = interp(WHO[sx].cM, m), S = interp(WHO[sx].cS, m); return M * (1 + z * S); },
+  cz(sx, m, x) { const M = interp(WHO[sx].cM, m), S = interp(WHO[sx].cS, m); return (x / M - 1) / S; }
+};
+const KIND = { h: { field: 'height', unit: 'cm', name: 'Tinggi badan', abbr: 'TB/U' }, w: { field: 'weight', unit: 'kg', name: 'Berat badan', abbr: 'BB/U' }, c: { field: 'head', unit: 'cm', name: 'Lingkar kepala', abbr: 'LK/U' } };
+function catC(z) {
+  if (z < -2) return { label: 'Di bawah −2 SD (mikrosefali?)', cls: 'bad' };
+  if (z > 2) return { label: 'Di atas +2 SD (makrosefali?)', cls: 'warn' };
+  return { label: 'Normal', cls: 'ok' };
+}
+const catOf = (k, z) => k === 'h' ? catH(z) : k === 'w' ? catW(z) : catC(z);
+const nick = () => S.child.name.trim().split(/\s+/)[0];
+// Kategori status gizi anak (Permenkes RI No. 2 Tahun 2020)
+function catH(z) {
+  if (z < -3) return { label: 'Sangat pendek', cls: 'bad' };
+  if (z < -2) return { label: 'Pendek', cls: 'bad' };
+  if (z <= 3) return { label: 'Normal', cls: z < -1 ? 'warn' : 'ok', hint: z < -1 ? 'Normal, di bawah median — pantau tren' : '' };
+  return { label: 'Tinggi', cls: 'info' };
+}
+function catW(z) {
+  if (z < -3) return { label: 'BB sangat kurang', cls: 'bad' };
+  if (z < -2) return { label: 'BB kurang', cls: 'bad' };
+  if (z <= 1) return { label: 'BB normal', cls: 'ok' };
+  return { label: 'Risiko BB lebih', cls: 'warn' };
+}
+function zOf(kind, date, v) {
+  const m = ageMonths(parseISO(S.child.dob), parseISO(date));
+  if (m < 0 || m > 61 || !(v > 0)) return null;
+  return kind === 'h' ? ref.hz(S.child.sex, m, v) : kind === 'w' ? ref.wz(S.child.sex, m, v) : ref.cz(S.child.sex, m, v);
+}
+
+// ---------- Data milestone & imunisasi ----------
+const CAT = { mk: 'Motorik kasar', mh: 'Motorik halus', bh: 'Bicara & bahasa', so: 'Sosial & emosi', kg: 'Kognitif & mandiri' };
+const MS = [
+  { m: 3, items: [['mk','Mengangkat kepala ±45° saat tengkurap'],['mh','Membuka genggaman dan memegang mainan sebentar'],['bh','Mengeluarkan suara "aah", "ooh"'],['so','Membalas senyum saat diajak bicara'],['kg','Mengikuti benda bergerak dengan pandangan mata']] },
+  { m: 6, items: [['mk','Berguling dari telentang ke tengkurap dan sebaliknya'],['mk','Duduk dengan sedikit bantuan'],['mh','Meraih mainan dan memindahkannya ke tangan lain'],['bh','Menoleh ke arah sumber suara'],['bh','Mengoceh suku kata seperti "ba", "ma"'],['so','Mengenali wajah orang terdekat']] },
+  { m: 9, items: [['mk','Duduk sendiri tanpa sandaran'],['mk','Merangkak atau bergeser maju'],['mh','Menjimpit benda kecil dengan ibu jari dan telunjuk'],['bh','Mengucap "mama"/"papa" (belum spesifik)'],['so','Bermain cilukba'],['kg','Mencari mainan yang dijatuhkan']] },
+  { m: 12, items: [['mk','Berdiri sendiri sebentar atau berjalan berpegangan'],['mh','Memasukkan benda ke dalam wadah'],['bh','Mengucap 1–2 kata yang bermakna'],['bh','Menunjuk benda yang diinginkan'],['so','Melambaikan tangan "dadah"'],['kg','Menemukan benda yang disembunyikan di bawah kain']] },
+  { m: 18, items: [['mk','Berjalan sendiri dengan stabil'],['mh','Mencoret-coret dengan krayon'],['mh','Menyusun 2–3 balok'],['bh','Mengucapkan minimal 6 kata'],['bh','Menunjuk minimal 1 bagian tubuh saat ditanya'],['so','Meniru kegiatan orang dewasa (menyapu, menelepon)'],['kg','Makan sendiri dengan sendok walau masih tumpah']] },
+  { m: 24, items: [['mk','Berlari tanpa sering jatuh'],['mk','Menendang bola ke depan'],['mk','Naik tangga dengan berpegangan'],['mh','Menyusun 4–6 balok'],['bh','Menggabungkan 2 kata ("mau susu")'],['bh','Menunjuk gambar saat namanya disebut'],['so','Bermain di dekat anak lain'],['kg','Mengikuti perintah sederhana ("ambil bola")']] },
+  { m: 30, items: [['mk','Melompat dengan dua kaki'],['mh','Membalik halaman buku satu per satu'],['bh','Menggunakan sekitar 50 kata atau lebih'],['bh','Menyebut nama benda di sekitarnya'],['so','Bermain pura-pura (menyuapi boneka)'],['kg','Menunjukkan hal yang bisa ia lakukan ("lihat aku!")']] },
+  { m: 36, items: [['mk','Mengayuh sepeda roda tiga'],['mk','Naik tangga dengan kaki bergantian'],['mh','Meniru menggambar lingkaran'],['bh','Bicara kalimat 3 kata, sebagian besar dipahami orang lain'],['bh','Menyebutkan nama sendiri'],['so','Mau bergantian saat bermain'],['kg','Mengenal minimal satu warna']] },
+  { m: 48, items: [['mk','Berdiri satu kaki minimal 3 detik'],['mk','Melompat dengan satu kaki'],['mh','Menggambar orang dengan 3 bagian tubuh'],['mh','Menggunting kertas dengan gunting anak'],['bh','Menceritakan pengalaman sederhana'],['so','Bermain bersama dengan aturan sederhana'],['kg','Berpakaian sendiri (kancing besar)']] },
+  { m: 60, items: [['mk','Menangkap bola besar dengan dua tangan'],['mk','Melompat-lompat bergantian kaki'],['mh','Menulis beberapa huruf atau namanya sendiri'],['mh','Meniru menggambar segitiga atau persegi'],['bh','Berbicara lancar dengan kalimat lengkap'],['so','Mengikuti aturan permainan bersama teman'],['kg','Menghitung benda sampai 10']] }
+];
+MS.forEach(s => {
+  s.label = s.m < 24 ? `Usia ${s.m} bulan` : s.m % 12 ? `Usia ${s.m} bulan (${(s.m / 12 | 0)}½ tahun)` : `Usia ${s.m / 12} tahun`;
+  s.items = s.items.map(([c, t], i) => ({ id: s.m + '-' + i, c, t }));
+});
+// P = program imunisasi pemerintah (Kemenkes), A = anjuran tambahan IDAI
+const IMM = [
+  { id:'hb0', m:0, n:'Hepatitis B (HB-0)', t:'P', note:'Idealnya < 24 jam setelah lahir' },
+  { id:'bcg', m:1, n:'BCG', t:'P' },
+  { id:'opv1', m:1, n:'Polio tetes (OPV) 1', t:'P' },
+  { id:'dpt1', m:2, n:'DPT-HB-Hib 1', t:'P' },
+  { id:'opv2', m:2, n:'Polio tetes (OPV) 2', t:'P' },
+  { id:'pcv1', m:2, n:'PCV 1 (pneumokokus)', t:'P' },
+  { id:'rv1', m:2, n:'Rotavirus 1', t:'P' },
+  { id:'dpt2', m:3, n:'DPT-HB-Hib 2', t:'P' },
+  { id:'opv3', m:3, n:'Polio tetes (OPV) 3', t:'P' },
+  { id:'pcv2', m:3, n:'PCV 2', t:'P' },
+  { id:'rv2', m:3, n:'Rotavirus 2', t:'P' },
+  { id:'dpt3', m:4, n:'DPT-HB-Hib 3', t:'P' },
+  { id:'opv4', m:4, n:'Polio tetes (OPV) 4', t:'P' },
+  { id:'ipv1', m:4, n:'Polio suntik (IPV) 1', t:'P' },
+  { id:'rv3', m:4, n:'Rotavirus 3', t:'P' },
+  { id:'flu1', m:6, n:'Influenza 1', t:'A', note:'Dosis ke-2 berjarak ±4 minggu' },
+  { id:'flu2', m:7, n:'Influenza 2', t:'A' },
+  { id:'mr1', m:9, n:'Campak-Rubela (MR) 1', t:'P' },
+  { id:'ipv2', m:9, n:'Polio suntik (IPV) 2', t:'P' },
+  { id:'je', m:9, n:'Japanese Encephalitis (JE)', t:'A', note:'Untuk daerah endemis atau rencana bepergian' },
+  { id:'pcv3', m:12, n:'PCV 3 (booster)', t:'P' },
+  { id:'var', m:12, n:'Varisela (cacar air)', t:'A' },
+  { id:'hepa1', m:12, n:'Hepatitis A 1', t:'A' },
+  { id:'dpt4', m:18, n:'DPT-HB-Hib 4 (lanjutan)', t:'P' },
+  { id:'mr2', m:18, n:'Campak-Rubela (MR) 2', t:'P' },
+  { id:'hepa2', m:18, n:'Hepatitis A 2', t:'A' },
+  { id:'flu3', m:18, n:'Influenza (ulangan tahunan)', t:'A' },
+  { id:'tif1', m:24, n:'Tifoid polisakarida', t:'A', note:'Diulang tiap 3 tahun' },
+  { id:'flu4', m:30, n:'Influenza (ulangan tahunan)', t:'A' },
+  { id:'flu5', m:42, n:'Influenza (ulangan tahunan)', t:'A' },
+  { id:'flu6', m:54, n:'Influenza (ulangan tahunan)', t:'A' },
+  { id:'tif2', m:60, n:'Tifoid (ulangan)', t:'A' },
+  { id:'dtp5', m:60, n:'DTP booster (usia 5–7 tahun)', t:'A' }
+];
+const immDue = v => addMonths(parseISO(S.child.dob), v.m);
+const PHOTO_STAGES = [[0,1,'Bayi baru lahir (0–1 bulan)'],[1,3,'1–3 bulan'],[3,6,'3–6 bulan'],[6,9,'6–9 bulan'],[9,12,'9–12 bulan'],[12,18,'12–18 bulan'],[18,24,'18–24 bulan'],[24,36,'2–3 tahun'],[36,48,'3–4 tahun'],[48,60,'4–5 tahun'],[60,1e9,'5 tahun ke atas']];
+
+// ---------- State aplikasi ----------
+let KEY = null, S = null, META = null, TAB = 'dash', chartRange = 'focus', photoMode = 'tl', lastActivity = Date.now(), timers = [];
+const thumbURLs = new Map();
+const openStages = new Set();
+function newState(child) {
+  return { v: 1, child, measurements: [], milestones: {}, imm: {}, reminders: [], photos: [], notes: '',
+    settings: { autolock: 10, remindDays: 7, notif: false }, notified: {}, created: new Date().toISOString() };
+}
+let saveChain = Promise.resolve();
+function save() {
+  if (!KEY || !S) return saveChain;
+  const k = KEY, snap = JSON.parse(JSON.stringify(S));
+  saveChain = saveChain.then(() => Vault.save(k, snap)).catch(e => toast('Gagal menyimpan: ' + (e.message || e.code || e)));
+  return saveChain;
+}
+const sorted = () => [...S.measurements].sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
+function latestOf(field) { const a = sorted().filter(x => x[field] > 0); return [a[a.length - 1], a[a.length - 2]]; }
+function stageInfo() {
+  const am = ageMonths(parseISO(S.child.dob), today());
+  let cur = null, next = null;
+  for (const s of MS) { if (s.m <= am + 0.5) cur = s; else if (!next) next = s; }
+  return { am, cur, next };
+}
+
+// ---------- UI umum ----------
+function toast(msg) {
+  const t = h('div', { class: 'toast', role: 'status' }, msg);
+  document.body.append(t); setTimeout(() => t.remove(), 3200);
+}
+function modal(title, body, buttons, opts = {}) {
+  return new Promise(res => {
+    const form = h('form', { method: 'dialog' },
+      h('div', { class: 'm-head' }, h('h3', {}, title)),
+      h('div', { class: 'm-body' }, body),
+      h('div', { class: 'm-foot' }, buttons.map(b => h('button', { class: 'btn ' + (b.cls || '') + (b.left ? ' left' : ''), value: b.value, formnovalidate: b.novalidate || b.value === 'cancel' }, b.label))));
+    const dlg = h('dialog', { class: 'modal' + (opts.wide ? ' wide' : '') }, form);
+    dlg.addEventListener('close', () => { res(dlg.returnValue || 'cancel'); setTimeout(() => dlg.remove(), 0); });
+    document.body.append(dlg); dlg.showModal();
+  });
+}
+const confirmBox = (title, msg, ok = 'Ya, lanjutkan', cls = 'primary') =>
+  modal(title, h('p', {}, msg), [{ label: 'Batal', value: 'cancel' }, { label: ok, value: 'ok', cls }]).then(r => r === 'ok');
+function rerender() { const y = window.scrollY; render(); window.scrollTo(0, y); }
+const field = (label, input, hint) => h('label', { class: 'f' }, h('span', {}, label), input, hint ? h('small', { class: 'tiny muted' }, hint) : null);
+
+// ---------- Gerbang: halaman masuk ----------
+function brandEl(sub) {
+  return h('div', { class: 'brand' }, h('div', { class: 'brand-mark' }, icon('sprout', 20)), h('div', {}, h('b', {}, 'Catatan Tumbuh Kembang'), h('span', { class: 'tiny muted' }, sub)));
+}
+function showGate(node) { $('#app').hidden = true; const g = $('#gate'); g.hidden = false; g.replaceChildren(node); }
+// ---------- Data awal (baseline) ----------
+// Riwayat dari Excel + foto disiapkan sebagai file backup terenkripsi (format sama dengan "Unduh backup").
+// File ini tidak berisi teks yang bisa dibaca: hanya kata sandi pemilik yang bisa membukanya.
+const BASELINE_URLS = ['data/baseline.json', 'public/data/baseline.json'];
+let BASE = null;
+async function fetchBaseline() {
+  if (BASE) return BASE;
+  for (const u of BASELINE_URLS) {
+    try {
+      const r = await fetch(u, { cache: 'no-cache' });
+      if (!r.ok) continue;
+      const d = await r.json();
+      if (d.app === 'catatan-tumbuh-kembang' && d.records?.state) return (BASE = d);
+    } catch (e) {}
+  }
+  throw new Error('Data awal belum ada. Pilih file baseline.json terlebih dahulu.');
+}
+// Jika data awal tidak ikut di proyek (mis. di Google AI Studio), pengguna memilih file baseline.json dari perangkat.
+async function readBaselineFile(file) {
+  let d; try { d = JSON.parse(await file.text()); } catch (e) { throw new Error('File ini bukan data awal yang valid.'); }
+  if (d.app !== 'catatan-tumbuh-kembang' || !d.records?.state) throw new Error('File ini bukan data awal yang valid.');
+  return (BASE = d);
+}
+// Buka data awal dengan kata sandi lalu simpan ke IndexedDB perangkat ini (tetap terenkripsi, tanpa enkripsi ulang).
+async function seedFromBaseline(pass) {
+  const base = await fetchBaseline();
+  const salt = fromB64(base.salt), k = await deriveKey(pass, salt, base.iter);
+  const recs = {};
+  for (const [key, v] of Object.entries(base.records)) recs[key] = { iv: fromB64(v.iv), ct: fromB64(v.ct) };
+  const st = await decJSON(k, recs.state); // gagal = kata sandi salah
+  const meta = { v: 1, salt, iter: base.iter, kid: uid() };
+  await DB.putMany({ ...recs, meta }, true);
+  META = meta;
+  return { k, st };
+}
+
+// ---------- Halaman masuk ----------
+function renderLogin(msg) {
+  const p = h('input', { type: 'password', required: true, autocomplete: 'current-password', autofocus: true });
+  const err = h('p', { class: 'small', style: 'color:var(--bad)', role: 'alert' }, msg || '');
+  const btn = h('button', { class: 'btn primary', type: 'submit' }, icon('lock', 18), 'Masuk');
+  const f = h('form', { class: 'stack' },
+    h('div', {}, h('h2', {}, 'Masuk'), h('p', { class: 'muted small' }, 'Masukkan kata sandi untuk membuka catatan.')),
+    field('Kata sandi', p), err, h('div', { class: 'spread' }, h('span'), btn));
+  // Pemilih file data awal: hanya muncul bila perangkat belum punya data dan baseline.json tidak ikut di proyek.
+  const fileInp = h('input', { type: 'file', accept: '.json,application/json' });
+  const fileInfo = h('span', { class: 'muted tiny' }, 'File baseline.json (terenkripsi) — cukup sekali di setiap perangkat. Bisa juga file "Unduh backup".');
+  const picker = h('label', { class: 'file-pick small', hidden: true }, h('b', {}, 'Pilih file data awal'), fileInfo, fileInp);
+  fileInp.addEventListener('change', async () => {
+    const file = fileInp.files[0]; if (!file) return;
+    err.textContent = '';
+    try { await readBaselineFile(file); fileInfo.textContent = `✓ ${file.name} (${(file.size / 1048576).toFixed(1)} MB) siap dibuka dengan kata sandi.`; p.focus(); }
+    catch (ex) { BASE = null; fileInfo.textContent = ''; err.textContent = ex.message; }
+  });
+  f.insertBefore(picker, f.children[1]);
+  if (!META && !BASE) fetchBaseline().catch(() => { picker.hidden = false; });
+  f.addEventListener('submit', async e => {
+    e.preventDefault(); err.textContent = ''; btn.disabled = true; btn.lastChild.textContent = 'Membuka…';
+    try {
+      let k, st;
+      if (META) { k = await deriveKey(p.value, META.salt, META.iter); st = await Vault.load(k); }
+      else {
+        try { await fetchBaseline(); } catch (ex) { err.textContent = ex.message; throw null; }
+        ({ k, st } = await seedFromBaseline(p.value));
+      }
+      st.settings = Object.assign({ autolock: 10, remindDays: 7, notif: false }, st.settings);
+      st.notified = st.notified || {}; st.reminders = st.reminders || [];
+      KEY = k; S = st;
+      enterApp();
+    } catch (ex) {
+      S = null; if (!err.textContent) err.textContent = 'Kata sandi salah.';
+      btn.disabled = false; btn.lastChild.textContent = 'Masuk'; p.select();
+    }
+  });
+  showGate(h('div', { class: 'card gate-card' }, brandEl('Catatan keluarga · terenkripsi'), f));
+  setTimeout(() => p.focus(), 50);
+}
+function lock(reason) {
+  KEY = null; S = null; 
+  thumbURLs.forEach(u => URL.revokeObjectURL(u)); thumbURLs.clear();
+  timers.forEach(clearInterval); timers = [];
+  document.querySelectorAll('dialog').forEach(d => d.remove());
+  $('#view').replaceChildren(); $('#print-root').replaceChildren();
+  renderLogin(reason);
+}
+function enterApp() {
+  $('#gate').hidden = true; $('#app').hidden = false;
+  $('#lock-btn').replaceChildren(icon('lock', 16), 'Kunci');
+  lastActivity = Date.now();
+  timers.push(setInterval(() => {
+    const m = S && S.settings.autolock;
+    if (m && Date.now() - lastActivity > m * 60000) lock('Terkunci otomatis karena tidak ada aktivitas.');
+  }, 20000));
+  timers.push(setInterval(runNotifications, 30 * 60000));
+  if (MODE.cloud) Vault.subscribe(onRemoteChange);
+  go('dash');
+  setTimeout(runNotifications, 1500);
+}
+// Render ulang saat keluarga lain mengubah data — ditunda bila sedang mengetik / dialog terbuka
+let remotePending = false;
+function onRemoteChange() {
+  const ae = document.activeElement;
+  if (document.querySelector('dialog[open]') || (ae && $('#view').contains(ae) && /INPUT|TEXTAREA|SELECT/.test(ae.tagName))) { remotePending = true; return; }
+  remotePending = false; if (S) rerender();
+}
+document.addEventListener('focusout', () => setTimeout(() => { if (remotePending && S) onRemoteChange(); }, 300));
+document.addEventListener('close', () => setTimeout(() => { if (remotePending && S) onRemoteChange(); }, 300), true);
+['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(ev => addEventListener(ev, () => { lastActivity = Date.now(); }, { passive: true }));
+$('#lock-btn').addEventListener('click', () => lock());
+
+// ---------- Navigasi ----------
+const TABS = [
+  ['dash', 'Dasbor', 'home', 'Dasbor'],
+  ['growth', 'Pertumbuhan', 'growth', 'Tumbuh'],
+  ['ms', 'Milestone', 'flag', 'Milestone'],
+  ['imm', 'Imunisasi', 'shield', 'Imunisasi'],
+  ['photo', 'Galeri Foto', 'photo', 'Foto'],
+  ['report', 'Laporan & Ekspor', 'report', 'Laporan'],
+  ['set', 'Pengaturan', 'gear', 'Atur']
+];
+function go(tab) { TAB = tab; render(); window.scrollTo(0, 0); }
+function renderNav() {
+  const alerts = computeAlerts();
+  const immAlert = alerts.some(a => a.tab === 'imm' && a.level !== 'info');
+  $('#nav').replaceChildren(brandEl(S.child.name),
+    ...TABS.map(([id, label, ic, short]) => h('button', { class: 'navbtn', type: 'button', 'aria-current': TAB === id ? 'page' : null, onclick: () => go(id) },
+      icon(ic), h('span', { class: 'lbl-long' }, matchMedia('(max-width:860px)').matches ? short : label), id === 'imm' && immAlert ? h('i', { class: 'dot' }) : null)),
+    h('div', { class: 'side-foot tiny muted' }, icon('shield', 14), MODE.cloud ? ' Terenkripsi AES-256 · tersinkron keluarga' : ' Terenkripsi AES-256 · tersimpan lokal'));
+}
+addEventListener('resize', () => { if (S) renderNav(); });
+function render() {
+  if (!S) return;
+  renderNav();
+  const t = TABS.find(x => x[0] === TAB);
+  $('#page-title').textContent = TAB === 'dash' ? `Halo, keluarga ${nick()}` : t[1];
+  $('#page-sub').textContent = TAB === 'dash' ? `Ringkasan per ${fmtD(today())}` : `${S.child.name} · ${ageText(parseISO(S.child.dob), today())}`;
+  const v = { dash: viewDash, growth: viewGrowth, ms: viewMilestones, imm: viewImm, photo: viewPhotos, report: viewReport, set: viewSettings }[TAB]();
+  const banner = MODE.cloud && !MODE.canWrite ? h('div', { class: 'alert info', style: 'cursor:default;margin-bottom:14px' }, h('span', { class: 'bar' }), h('span', {}, h('b', {}, 'Mode lihat saja'), h('span', { class: 'small' }, 'Akun Anda diundang sebagai Viewer. Minta pemilik mengubah akses Anda menjadi Editor agar bisa menambah data & foto.'))) : null;
+  $('#view').replaceChildren(...[banner, v].filter(Boolean));
+}
+
+// ---------- Peringatan & notifikasi ----------
+function computeAlerts() {
+  const a = [], t = today(), rd = S.settings.remindDays, dob = parseISO(S.child.dob);
+  const odP = [], odA = [];
+  IMM.forEach(v => {
+    if (S.imm[v.id]?.done) return;
+    const due = immDue(v), d = daysBetween(t, due);
+    if (d < 0) (v.t === 'P' ? odP : odA).push(v);
+    else if (d <= rd) a.push({ key: 'imm-' + v.id, level: 'warn', tab: 'imm', notify: true, title: `Imunisasi ${v.n}`, text: d === 0 ? 'Dijadwalkan hari ini' : `Dijadwalkan ${d} hari lagi · ${fmtD(due)}` });
+  });
+  if (odP.length) a.push({ key: 'imm-overdue', level: 'bad', tab: 'imm', notify: true, title: `${odP.length} imunisasi program belum tercatat`, text: odP.slice(0, 3).map(v => v.n).join(', ') + (odP.length > 3 ? ', dll' : '') + '. Tandai jika sudah diberikan, atau tanyakan jadwal kejar ke dokter/bidan.' });
+  if (odA.length) a.push({ key: 'imm-overdue-a', level: 'info', tab: 'imm', title: `${odA.length} imunisasi anjuran IDAI belum tercatat`, text: 'Opsional — diskusikan dengan dokter anak.' });
+  S.reminders.forEach(r => {
+    if (r.done) return;
+    const d = daysBetween(t, parseISO(r.date));
+    if (d < 0) a.push({ key: 'rem-' + r.id, level: 'bad', tab: 'imm', notify: true, title: r.title, text: `Terlewat ${-d} hari (${fmtDate(r.date)})` });
+    else if (d <= rd) a.push({ key: 'rem-' + r.id, level: 'warn', tab: 'imm', notify: true, title: r.title, text: d === 0 ? 'Hari ini' : `${d} hari lagi · ${fmtDate(r.date)}` });
+  });
+  const lm = sorted().at(-1);
+  if (!lm) a.push({ key: 'measure', level: 'warn', tab: 'growth', title: 'Belum ada data pengukuran', text: 'Catat tinggi & berat badan pertama.' });
+  else {
+    const d = daysBetween(parseISO(lm.date), t);
+    if (d >= 30) a.push({ key: 'measure', level: 'info', tab: 'growth', notify: true, title: 'Waktunya menimbang & mengukur', text: `Pengukuran terakhir ${d} hari lalu. Disarankan setiap bulan (misal saat Posyandu).` });
+    const [lh] = latestOf('height'), [lw] = latestOf('weight');
+    const zh = lh && zOf('h', lh.date, lh.height), zw = lw && zOf('w', lw.date, lw.weight);
+    if (zh != null && zh < -2) a.push({ key: 'zh', level: 'bad', tab: 'growth', title: 'Tinggi badan di bawah −2 SD', text: 'Konsultasikan dengan dokter anak untuk evaluasi pertumbuhan.' });
+    if (zw != null && zw < -2) a.push({ key: 'zw', level: 'bad', tab: 'growth', title: 'Berat badan di bawah −2 SD', text: 'Konsultasikan dengan dokter anak atau tenaga gizi.' });
+    if (zw != null && zw > 1) a.push({ key: 'zw2', level: 'warn', tab: 'growth', title: 'Berat badan di atas +1 SD', text: 'Berisiko berat badan lebih; pantau pola makan & aktivitas.' });
+  }
+  const am = ageMonths(dob, t);
+  const miss = MS.filter(s => s.m <= am - 2).flatMap(s => s.items).filter(i => !S.milestones[i.id]?.done);
+  if (miss.length) a.push({ key: 'ms', level: 'info', tab: 'ms', title: `${miss.length} milestone usia sebelumnya belum dicentang`, text: 'Centang yang sudah dikuasai. Bila memang belum bisa, catat untuk didiskusikan dengan dokter.' });
+  const order = { bad: 0, warn: 1, info: 2 };
+  return a.sort((x, y) => order[x.level] - order[y.level]);
+}
+function runNotifications() {
+  if (!S) return;
+  if (!S.settings.notif || !('Notification' in window) || Notification.permission !== 'granted') return;
+  const d = toISO(today()); let changed = false;
+  computeAlerts().filter(x => x.notify).forEach(x => {
+    if (S.notified[x.key] === d) return;
+    try { new Notification(`${S.child.name}: ${x.title}`, { body: x.text, tag: x.key }); } catch (e) {}
+    S.notified[x.key] = d; changed = true;
+  });
+  if (changed) save();
+}
+function alertList(alerts) {
+  if (!alerts.length) return h('p', { class: 'muted small' }, 'Semua beres — tidak ada yang perlu ditindaklanjuti. 🎉');
+  return h('div', { class: 'alerts' }, alerts.map(x => h('button', { class: 'alert ' + x.level, type: 'button', onclick: () => go(x.tab) },
+    h('span', { class: 'bar' }), h('span', {}, h('b', {}, x.title), h('span', { class: 'small' }, x.text)))));
+}
+
+// ---------- Dasbor ----------
+function growthTile(kind) {
+  const fieldName = kind === 'h' ? 'height' : 'weight', unit = kind === 'h' ? 'cm' : 'kg';
+  const [l, p] = latestOf(fieldName);
+  const body = h('div', { class: 'card tile' }, h('span', { class: 'lbl' }, kind === 'h' ? 'Tinggi badan' : 'Berat badan'));
+  if (!l) { body.append(h('span', { class: 'val' }, '—'), h('span', { class: 'small muted' }, 'Belum ada data')); return body; }
+  const z = zOf(kind, l.date, l[fieldName]), c = z == null ? null : (kind === 'h' ? catH(z) : catW(z));
+  body.append(h('span', { class: 'val' }, fmtNum(l[fieldName], 2), h('small', {}, unit)),
+    h('div', { class: 'row', style: 'gap:6px' }, c ? h('span', { class: 'pill ' + c.cls }, c.label) : null, z != null ? h('span', { class: 'tiny muted' }, `z ${fmtZ(z)} SD`) : null),
+    h('span', { class: 'tiny muted' }, `Diukur ${fmtDate(l.date)}` + (p ? ` · ${(l[fieldName] - p[fieldName] >= 0 ? '+' : '')}${fmtNum(l[fieldName] - p[fieldName], 2)} ${unit} sejak ${fmtDate(p.date)}` : '')));
+  return body;
+}
+function nextImm() {
+  const t = today();
+  return IMM.filter(v => !S.imm[v.id]?.done && immDue(v) >= t).sort((a, b) => a.m - b.m);
+}
+function viewDash() {
+  const c = S.child, dob = parseISO(c.dob), t = today();
+  const { cur, next } = stageInfo();
+  const alerts = computeAlerts();
+  const av = h('div', { class: 'avatar' }, c.name.slice(0, 1).toUpperCase());
+  const lastPhoto = [...S.photos].sort((a, b) => a.date < b.date ? 1 : -1)[0];
+  if (lastPhoto) thumbURL(lastPhoto.id).then(u => { if (u) av.replaceChildren(h('img', { src: u, alt: 'Foto terbaru ' + c.name })); });
+  const hero = h('section', { class: 'card hero' }, av,
+    h('div', { class: 'hero-main' }, h('h2', {}, c.name), h('p', { class: 'muted' }, `${ageText(dob, t)} · ${c.sex === 'L' ? 'Laki-laki' : 'Perempuan'} · lahir ${fmtDate(c.dob)}`)),
+    h('div', { class: 'row' },
+      h('button', { class: 'btn primary', type: 'button', onclick: () => go('growth') }, icon('plus', 18), 'Catat pengukuran'),
+      h('button', { class: 'btn', type: 'button', onclick: () => go('photo') }, icon('photo', 18), 'Foto'),
+      h('button', { class: 'btn', type: 'button', onclick: () => go('report') }, icon('report', 18), 'Laporan')));
+
+  // milestone tile
+  const msTile = h('div', { class: 'card tile' }, h('span', { class: 'lbl' }, 'Milestone'));
+  if (cur) {
+    const done = cur.items.filter(i => S.milestones[i.id]?.done).length;
+    msTile.append(h('span', { class: 'val' }, done, h('small', {}, `/ ${cur.items.length}`)),
+      h('div', { class: 'progress' }, h('i', { style: `width:${done / cur.items.length * 100}%` })),
+      h('span', { class: 'tiny muted' }, `${cur.label}` + (next ? ` · berikutnya ${next.m} bln` : '')));
+  } else msTile.append(h('span', { class: 'val' }, '—'), h('span', { class: 'tiny muted' }, 'Tahap pertama: 3 bulan'));
+  msTile.style.cursor = 'pointer'; msTile.addEventListener('click', () => go('ms'));
+
+  // imm tile
+  const ni = nextImm()[0];
+  const immTile = h('div', { class: 'card tile' }, h('span', { class: 'lbl' }, 'Imunisasi berikutnya'));
+  if (ni) {
+    const d = daysBetween(t, immDue(ni));
+    immTile.append(h('span', { class: 'val', style: 'font-size:1.25rem' }, ni.n),
+      h('div', { class: 'row', style: 'gap:6px' }, h('span', { class: 'pill ' + (d <= S.settings.remindDays ? 'warn' : 'info') }, d === 0 ? 'Hari ini' : `${d} hari lagi`), h('span', { class: 'tiny muted' }, fmtD(immDue(ni)))),
+      h('span', { class: 'tiny muted' }, ni.t === 'P' ? 'Program pemerintah' : 'Anjuran IDAI'));
+  } else immTile.append(h('span', { class: 'val' }, '—'), h('span', { class: 'tiny muted' }, 'Tidak ada jadwal mendatang'));
+  immTile.style.cursor = 'pointer'; immTile.addEventListener('click', () => go('imm'));
+
+  const tiles = h('div', { class: 'grid g4' }, growthTile('h'), growthTile('w'), msTile, immTile);
+
+  const chartCard = h('section', { class: 'card' },
+    h('div', { class: 'card-head' }, h('h3', {}, 'Tinggi badan menurut umur'), h('button', { class: 'btn sm ghost', type: 'button', onclick: () => go('growth') }, 'Lihat semua grafik →')),
+    h('div', { html: growthChartSVG('h', 'focus', { compact: true }) }), chartLegend());
+
+  const photos = [...S.photos].sort((a, b) => a.date < b.date ? 1 : -1).slice(0, 4);
+  const photoCard = h('section', { class: 'card' },
+    h('div', { class: 'card-head' }, h('h3', {}, 'Foto terbaru'), h('button', { class: 'btn sm ghost', type: 'button', onclick: () => go('photo') }, 'Galeri →')),
+    photos.length ? h('div', { class: 'thumbs' }, photos.map(p => photoTile(p, false))) : h('p', { class: 'muted small' }, 'Belum ada foto. Simpan momen di setiap tahap usia.'));
+
+  const upcoming = nextImm().slice(0, 4);
+  const immCard = h('section', { class: 'card' }, h('div', { class: 'card-head' }, h('h3', {}, 'Jadwal imunisasi mendatang')),
+    upcoming.length ? h('div', { class: 'list' }, upcoming.map(v => h('div', { class: 'li' }, h('span', {}, v.n, ' ', h('span', { class: 'pill' }, v.t === 'P' ? 'Program' : 'IDAI')), h('span', { class: 'small muted' }, fmtD(immDue(v)))))) : h('p', { class: 'muted small' }, 'Tidak ada jadwal mendatang.'));
+
+  return h('div', { class: 'stack' }, hero, tiles,
+    h('div', { class: 'grid g2' },
+      h('section', { class: 'card' }, h('div', { class: 'card-head' }, h('h3', {}, 'Perlu perhatian'), alerts.length ? h('span', { class: 'pill' }, alerts.length) : null), alertList(alerts)),
+      chartCard),
+    h('div', { class: 'grid g2' }, immCard, photoCard));
+}
+
+// ---------- Grafik ----------
+function chartLegend() {
+  return h('div', { class: 'legend' },
+    h('span', {}, h('i', { style: 'background:var(--band-ok);border:1px solid var(--ok)' }), 'Normal (−2 s/d +2 SD)'),
+    h('span', {}, h('i', { style: 'background:var(--band-warn)' }), '±2 s/d ±3 SD'),
+    h('span', {}, h('i', { style: 'background:var(--ok);height:3px' }), 'Median WHO'),
+    h('span', {}, h('i', { style: 'background:var(--pt);border-radius:50%' }), S.child.name));
+}
+function growthChartSVG(kind, range, opt = {}) {
+  const sx = S.child.sex, dob = parseISO(S.child.dob), fieldName = KIND[kind].field, unit = KIND[kind].unit;
+  const pts = S.measurements.filter(x => x[fieldName] > 0).map(x => ({ m: ageMonths(dob, parseISO(x.date)), v: +x[fieldName], d: x.date })).filter(p => p.m >= 0 && p.m <= 60).sort((a, b) => a.m - b.m);
+  const nowM = Math.min(60, Math.max(0, ageMonths(dob, today())));
+  let m0 = 0, m1 = 60;
+  if (range === 'focus') { m0 = Math.max(0, Math.floor((nowM - 12) / 3) * 3); m1 = Math.min(60, Math.ceil((nowM + 6) / 3) * 3); if (m1 - m0 < 12) m0 = Math.max(0, m1 - 12); }
+  else if (range === '0-24') m1 = 24;
+  else if (range === 'report') m1 = Math.min(60, Math.max(24, Math.ceil((nowM + 6) / 6) * 6));
+  const f = ref[kind];
+  const N = 90;
+  let lo = Infinity, hi = -Infinity;
+  for (let i = 0; i <= N; i++) { const m = m0 + (m1 - m0) * i / N; lo = Math.min(lo, f(sx, m, -3)); hi = Math.max(hi, f(sx, m, 3)); }
+  pts.forEach(p => { if (p.m >= m0 && p.m <= m1) { lo = Math.min(lo, p.v); hi = Math.max(hi, p.v); } });
+  const ys = [0.5, 1, 2, 5, 10, 20].find(s => (hi - lo) / s <= 8) || 20;
+  lo = Math.floor(lo / ys) * ys; hi = Math.ceil(hi / ys) * ys;
+  const W = 640, H = opt.compact ? 260 : 340, L = 42, R = 34, T = 22, B = 38;
+  const X = m => L + (m - m0) / (m1 - m0) * (W - L - R), Y = v => T + (hi - v) / (hi - lo) * (H - T - B);
+  const curve = z => { const a = []; for (let i = 0; i <= N; i++) { const m = m0 + (m1 - m0) * i / N; a.push([X(m), Y(f(sx, m, z))]); } return a; };
+  const P = a => a.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('');
+  const band = (z1, z2, cls) => `<path class="${cls}" d="${P(curve(z1))}${curve(z2).reverse().map(p => 'L' + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('')}Z"/>`;
+  let s = `<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="Grafik ${KIND[kind].name.toLowerCase()} menurut umur, ${pts.length} titik data">`;
+  for (let v = lo; v <= hi + 1e-9; v += ys) s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text class="tick" x="${L - 6}" y="${(Y(v) + 4).toFixed(1)}" text-anchor="end">${fmtNum(v)}</text>`;
+  const xs = (m1 - m0) <= 24 ? 3 : 6;
+  for (let m = Math.ceil(m0 / xs) * xs; m <= m1; m += xs) s += `<line class="grid" x1="${X(m).toFixed(1)}" x2="${X(m).toFixed(1)}" y1="${T}" y2="${H - B}"/><text class="tick" x="${X(m).toFixed(1)}" y="${H - B + 15}" text-anchor="middle">${m}</text>`;
+  s += band(-3, -2, 'band-warn') + band(-2, 2, 'band-ok') + band(2, 3, 'band-warn');
+  [[-3, 'z3'], [-2, 'z2'], [0, 'z0'], [2, 'z2'], [3, 'z3']].forEach(([z, c]) => { const a = curve(z); s += `<path class="zl ${c}" d="${P(a)}"/><text class="zlab" x="${W - R + 4}" y="${(a[a.length - 1][1] + 4).toFixed(1)}">${z > 0 ? '+' + z : z === 0 ? '0' : '−' + (-z)}</text>`; });
+  if (nowM >= m0 && nowM <= m1 && !opt.noToday) s += `<line class="today" x1="${X(nowM).toFixed(1)}" x2="${X(nowM).toFixed(1)}" y1="${T}" y2="${H - B}"/><text class="todaylab" x="${X(nowM).toFixed(1)}" y="${T - 6}" text-anchor="middle">Hari ini</text>`;
+  const vis = pts.filter(p => p.m >= m0 - 0.01 && p.m <= m1 + 0.01);
+  if (vis.length > 1) s += `<path class="pline" d="${P(vis.map(p => [X(p.m), Y(p.v)]))}"/>`;
+  vis.forEach(p => { s += `<circle class="pt" cx="${X(p.m).toFixed(1)}" cy="${Y(p.v).toFixed(1)}" r="5"><title>${fmtDate(p.d)} · ${fmtNum(p.v, 2)} ${unit}</title></circle>`; });
+  s += `<text class="axl" x="4" y="13">${unit}</text><text class="axl" x="${(L + W - R) / 2}" y="${H - 6}" text-anchor="middle">Usia (bulan)</text></svg>`;
+  return s;
+}
+
+// ---------- Pertumbuhan ----------
+function viewGrowth() {
+  const d = h('input', { type: 'date', required: true, value: toISO(today()), max: toISO(today()), min: S.child.dob });
+  const tb = h('input', { type: 'number', step: '0.1', min: '30', max: '150', inputmode: 'decimal', placeholder: 'mis. 85,5' });
+  const bb = h('input', { type: 'number', step: '0.01', min: '1', max: '60', inputmode: 'decimal', placeholder: 'mis. 12,2' });
+  const lk = h('input', { type: 'number', step: '0.1', min: '25', max: '60', inputmode: 'decimal', placeholder: 'opsional' });
+  const sh = h('input', { type: 'number', step: '0.1', min: '34', max: '43', inputmode: 'decimal', placeholder: 'opsional' });
+  const pl = h('input', { type: 'text', maxlength: 100, placeholder: 'mis. Posyandu / RSIA' });
+  const nt = h('textarea', { maxlength: 2000, placeholder: 'mis. imunisasi DPT-1, kondisi, saran dokter', style: 'min-height:42px' });
+  const ph = h('input', { type: 'file', accept: 'image/*', multiple: true });
+  const form = h('form', { class: 'stack' },
+    h('div', { class: 'form-grid' }, field('Tanggal ukur', d), field('Tinggi / panjang (cm)', tb), field('Berat (kg)', bb), field('Lingkar kepala (cm)', lk), field('Suhu (°C)', sh), field('Lokasi kontrol', pl)),
+    h('div', { class: 'form-grid' }, field('Catatan', nt), field('Foto (opsional)', ph, 'Tersimpan terenkripsi & tertaut ke kontrol ini')),
+    h('div', { class: 'row' }, h('button', { class: 'btn primary', type: 'submit' }, icon('plus', 18), 'Simpan pengukuran'),
+      h('button', { class: 'btn', type: 'button', onclick: () => pickFiles(f => importHistory(f[0]), '.xlsx,.csv,text/csv', false) }, icon('up', 18), 'Impor dari Excel / CSV'),
+      h('span', { class: 'tiny muted' }, 'Isi minimal tinggi, berat, atau lingkar kepala.')));
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const num = el => { const v = parseFloat(el.value); return v > 0 ? v : null; };
+    const rec = { id: uid(), date: d.value, height: num(tb), weight: num(bb), head: num(lk), temp: num(sh), place: pl.value.trim(), note: nt.value.trim() };
+    if (!rec.height && !rec.weight && !rec.head) { toast('Isi tinggi, berat, atau lingkar kepala.'); return; }
+    S.measurements.push(rec);
+    if (ph.files.length) await addPhotos(ph.files, { date: rec.date, link: { type: 'm', id: rec.id }, caption: rec.place ? 'Kontrol di ' + rec.place : 'Kontrol ' + fmtDate(rec.date) });
+    await save(); toast('Pengukuran tersimpan'); rerender();
+  });
+
+  const seg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Rentang grafik' },
+    [['focus', 'Sekitar usia kini'], ['0-24', '0–2 tahun'], ['all', '0–5 tahun']].map(([k, l]) => h('button', { type: 'button', 'aria-pressed': String(chartRange === k), onclick: () => { chartRange = k; rerender(); } }, l)));
+  const charts = h('section', { class: 'card' },
+    h('div', { class: 'card-head' }, h('h3', { style: 'margin:0' }, 'Grafik pertumbuhan (standar WHO)'), seg),
+    h('div', { class: 'chart-grid' }, ['h', 'w', 'c'].map(k =>
+      h('div', {}, h('h4', { class: 'small', style: 'margin-bottom:6px' }, `${KIND[k].name} menurut umur (${KIND[k].abbr})`), h('div', { html: growthChartSVG(k, chartRange) })))),
+    chartLegend(),
+    h('p', { class: 'tiny muted', style: 'margin-top:8px' }, 'Garis ±2/±3 = simpangan baku (SD) dari median WHO Child Growth Standards. Nilai merupakan pendekatan interpolasi; untuk keputusan medis gunakan penilaian dokter / KMS.'));
+
+  const rows = sorted().reverse();
+  const table = h('section', { class: 'card' }, h('div', { class: 'card-head' }, h('h3', { style: 'margin:0' }, 'Riwayat pengukuran'), h('span', { class: 'pill' }, rows.length + ' data')),
+    rows.length ? h('div', { class: 'tbl-wrap' }, measureTable(rows, true)) : h('p', { class: 'muted small' }, 'Belum ada data.'));
+  return h('div', { class: 'stack' }, h('section', { class: 'card' }, h('h3', {}, 'Catat pengukuran baru'), form), charts, table);
+}
+function measureTable(rows, withActions) {
+  const dob = parseISO(S.child.dob);
+  const zc = (k, r) => { const v = r[KIND[k].field]; if (!v) return '—'; const z = zOf(k, r.date, v); if (z == null) return '—'; const c = catOf(k, z); return h('span', { class: 'pill ' + c.cls, title: c.label }, withActions ? `${fmtZ(z)} · ${c.label.replace(/ \(.*\)$/, '')}` : `${fmtZ(z)} ${c.label}`); };
+  return h('table', {},
+    h('thead', {}, h('tr', {}, h('th', {}, 'Tanggal'), h('th', {}, 'Usia'), h('th', { class: 'num' }, 'TB (cm)'), h('th', {}, 'TB/U'), h('th', { class: 'num' }, 'BB (kg)'), h('th', {}, 'BB/U'), h('th', { class: 'num' }, 'LK (cm)'), h('th', {}, 'LK/U'), h('th', { class: 'num' }, 'Suhu'), h('th', {}, 'Lokasi & catatan'), withActions ? h('th', {}, 'Foto') : null, withActions ? h('th', {}, '') : null)),
+    h('tbody', {}, rows.map(r => h('tr', {},
+        h('td', { style: 'white-space:nowrap' }, fmtDate(r.date)),
+        h('td', { style: 'white-space:nowrap' }, ageText(dob, parseISO(r.date), true)),
+        h('td', { class: 'num' }, r.height ? fmtNum(r.height, 1) : '—'), h('td', {}, zc('h', r)),
+        h('td', { class: 'num' }, r.weight ? fmtNum(r.weight, 2) : '—'), h('td', {}, zc('w', r)),
+        h('td', { class: 'num' }, r.head ? fmtNum(r.head, 1) : '—'), h('td', {}, zc('c', r)),
+        h('td', { class: 'num' }, r.temp ? fmtNum(r.temp, 1) + '°' : '—'),
+        h('td', { class: 'small', style: 'min-width:180px' }, r.place ? h('b', { style: 'display:block' }, r.place) : null, r.note ? h('span', { class: withActions ? 'clamp' : '', title: withActions ? r.note : null, style: 'white-space:pre-wrap' }, r.note) : null),
+        withActions ? h('td', {}, miniPhotos({ type: 'm', id: r.id }, () => ({ date: r.date, caption: r.place ? 'Kontrol di ' + r.place : 'Kontrol ' + fmtDate(r.date) }), 2)) : null,
+        withActions ? h('td', {}, h('button', { class: 'btn sm ghost', type: 'button', title: 'Hapus', 'aria-label': 'Hapus pengukuran ' + fmtDate(r.date), onclick: async () => {
+          if (!await confirmBox('Hapus pengukuran?', `Data tanggal ${fmtDate(r.date)} akan dihapus. Foto terkait tetap ada di galeri.`, 'Hapus', 'danger')) return;
+          S.measurements = S.measurements.filter(x => x.id !== r.id);
+          S.photos.forEach(p => { if (p.link?.type === 'm' && p.link.id === r.id) p.link = null; });
+          await save(); rerender();
+        } }, icon('trash', 16))) : null))));
+}
+
+// ---------- Milestone ----------
+function viewMilestones() {
+  const { am, cur, next } = stageInfo();
+  if (!openStages.size) { if (cur) openStages.add(cur.m); if (next) openStages.add(next.m); }
+  const wrap = h('div', {});
+  MS.forEach(s => {
+    const done = s.items.filter(i => S.milestones[i.id]?.done).length;
+    const isPast = s.m <= am - 2, isCur = cur && s.m === cur.m;
+    const status = done === s.items.length ? h('span', { class: 'pill ok' }, 'Lengkap')
+      : isCur ? h('span', { class: 'pill info' }, 'Tahap saat ini')
+      : next && s.m === next.m ? h('span', { class: 'pill' }, 'Berikutnya')
+      : isPast ? h('span', { class: 'pill warn' }, `${s.items.length - done} belum dicentang`) : h('span', { class: 'pill' }, 'Akan datang');
+    const det = h('details', { class: 'stage' + (isCur ? ' current' : ''), open: openStages.has(s.m) },
+      h('summary', {}, h('div', {}, h('b', {}, s.label), h('span', { class: 'small muted' }, ` · ${done}/${s.items.length} tercapai`)), status,
+        h('div', { class: 'progress' }, h('i', { style: `width:${done / s.items.length * 100}%` }))),
+      s.items.map(it => {
+        const st = S.milestones[it.id];
+        const cb = h('input', { type: 'checkbox', checked: !!st?.done });
+        const dateIn = st?.done ? h('input', { type: 'date', value: st.date || '', max: toISO(today()), min: S.child.dob, style: 'width:auto;padding:3px 8px;font-size:.8rem', 'aria-label': 'Tanggal tercapai', onclick: e => e.stopPropagation(), onchange: async e => { S.milestones[it.id].date = e.target.value; await save(); } }) : null;
+        cb.addEventListener('change', async () => {
+          if (cb.checked) S.milestones[it.id] = { done: true, date: toISO(today()) }; else delete S.milestones[it.id];
+          await save(); rerender();
+        });
+        const link = { type: 'ms', id: it.id };
+        return h('label', { class: 'ms-item' + (st?.done ? ' done' : '') }, cb,
+          h('div', { class: 'txt' }, h('div', { class: 't' }, it.t), h('div', { class: 'row', style: 'gap:6px;margin-top:4px' }, h('span', { class: 'cat ' + it.c }, CAT[it.c]), st?.done ? h('span', { class: 'tiny muted' }, 'Tercapai:') : null, dateIn)),
+          miniPhotos(link, () => ({ date: S.milestones[it.id]?.date || toISO(today()), caption: it.t })));
+      }));
+    det.addEventListener('toggle', () => { det.open ? openStages.add(s.m) : openStages.delete(s.m); });
+    wrap.append(det);
+  });
+  return h('div', { class: 'stack' },
+    h('section', { class: 'card' }, h('div', { class: 'spread' },
+      h('div', {}, h('h3', { style: 'margin-bottom:4px' }, 'Checklist perkembangan'), h('p', { class: 'small muted' }, 'Centang kemampuan yang sudah konsisten dilakukan. Setiap anak berkembang dengan kecepatannya sendiri; usia di sini adalah usia ketika sebagian besar anak sudah mampu melakukannya.')),
+      h('div', { class: 'legend', style: 'margin:0' }, Object.entries(CAT).map(([k, v]) => h('span', { class: 'cat ' + k }, v))))),
+    wrap,
+    h('p', { class: 'tiny muted' }, 'Disusun mengacu pada panduan pemantauan perkembangan (KPSP Kemenkes, buku KIA, dan panduan IDAI). Bila ada beberapa kemampuan yang belum tercapai jauh melewati usianya, atau kemampuan yang hilang, segera konsultasikan dengan dokter anak.'));
+}
+
+// ---------- Imunisasi ----------
+function immStatus(v) {
+  const st = S.imm[v.id];
+  if (st?.done) return { cls: 'ok', label: 'Sudah' };
+  const d = daysBetween(today(), immDue(v));
+  if (d < 0) return { cls: v.t === 'P' ? 'bad' : 'warn', label: 'Belum tercatat' };
+  if (d <= S.settings.remindDays) return { cls: 'warn', label: d === 0 ? 'Hari ini' : `${d} hari lagi` };
+  if (d <= 60) return { cls: 'info', label: `${d} hari lagi` };
+  return { cls: '', label: 'Terjadwal' };
+}
+function viewImm() {
+  const notifSupported = 'Notification' in window;
+  const perm = notifSupported ? Notification.permission : 'unsupported';
+  const notifState = !notifSupported ? h('span', { class: 'pill warn' }, 'Browser tidak mendukung')
+    : perm === 'granted' && S.settings.notif ? h('span', { class: 'pill ok' }, 'Notifikasi aktif')
+    : perm === 'denied' ? h('span', { class: 'pill bad' }, 'Diblokir di browser') : h('span', { class: 'pill' }, 'Belum aktif');
+  const rd = h('select', { style: 'width:auto', onchange: async e => { S.settings.remindDays = +e.target.value; await save(); rerender(); } },
+    [3, 7, 14, 30].map(n => h('option', { value: n, selected: S.settings.remindDays === n }, `${n} hari sebelumnya`)));
+  const gcal = (title, d) => { const n = new Date(d); n.setDate(n.getDate() + 1); const f = x => `${x.getFullYear()}${pad(x.getMonth() + 1)}${pad(x.getDate())}`;
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(title) + '&dates=' + f(d) + '/' + f(n) + '&details=' + encodeURIComponent('Konfirmasi jadwal dengan dokter/bidan.'); };
+  const upcoming = nextImm().slice(0, 6);
+  const ctrl = MODE.cloud ? h('section', { class: 'card' },
+    h('div', { class: 'card-head' }, h('h3', { style: 'margin:0' }, 'Pengingat'), h('label', { class: 'row small', style: 'gap:6px' }, 'Tandai "segera" bila', rd)),
+    h('p', { class: 'small muted', style: 'margin-bottom:10px' }, 'Versi keluarga berjalan di dalam claude.ai sehingga notifikasi browser tidak tersedia. Tambahkan jadwal ke Google Calendar masing-masing agar pengingat berbunyi di HP:'),
+    upcoming.length ? h('div', { class: 'list' }, upcoming.map(v => h('div', { class: 'li' }, h('span', {}, v.n, h('span', { class: 'tiny muted' }, ' · ' + fmtD(immDue(v)))),
+      h('a', { class: 'btn sm', href: gcal(`Imunisasi ${nick()}: ${v.n}`, immDue(v)), target: '_blank', rel: 'noopener noreferrer' }, icon('cal', 16), 'Google Calendar')))) : h('p', { class: 'small muted' }, 'Tidak ada jadwal mendatang.'))
+  : h('section', { class: 'card' },
+    h('div', { class: 'card-head' }, h('h3', { style: 'margin:0' }, 'Pengingat'), notifState),
+    h('div', { class: 'row' },
+      notifSupported && !(perm === 'granted' && S.settings.notif) ? h('button', { class: 'btn primary', type: 'button', onclick: async () => {
+        const p = await Notification.requestPermission();
+        S.settings.notif = p === 'granted'; await save();
+        if (p === 'granted') { try { new Notification('Notifikasi aktif', { body: `Pengingat jadwal ${S.child.name} akan muncul di sini.` }); } catch (e) {} S.notified = {}; runNotifications(); }
+        else toast('Izin notifikasi tidak diberikan');
+        rerender();
+      } }, icon('bell', 18), 'Aktifkan notifikasi') : null,
+      perm === 'granted' && S.settings.notif ? h('button', { class: 'btn', type: 'button', onclick: async () => { S.settings.notif = false; await save(); rerender(); } }, 'Matikan notifikasi') : null,
+      h('label', { class: 'row small', style: 'gap:6px' }, 'Ingatkan', rd),
+      h('button', { class: 'btn', type: 'button', onclick: exportICS }, icon('cal', 18), 'Tambahkan ke kalender (.ics)')),
+    h('p', { class: 'tiny muted', style: 'margin-top:10px' }, 'Notifikasi browser muncul saat aplikasi ini terbuka. Agar pengingat tetap berbunyi walau aplikasi ditutup, impor file .ics ke Google Calendar / kalender ponsel — setiap jadwal sudah berisi alarm H-7 dan H-1.'));
+
+  // jadwal
+  const groups = {};
+  IMM.forEach(v => (groups[v.m] = groups[v.m] || []).push(v));
+  const list = h('section', { class: 'card' },
+    h('div', { class: 'card-head' }, h('h3', { style: 'margin:0' }, 'Jadwal imunisasi'),
+      h('div', { class: 'row' }, h('span', { class: 'pill' }, 'P = program pemerintah'), h('span', { class: 'pill' }, 'A = anjuran IDAI'),
+        h('button', { class: 'btn sm', type: 'button', onclick: async () => {
+          const due = IMM.filter(v => !S.imm[v.id]?.done && immDue(v) < today() && v.t === 'P');
+          if (!due.length) { toast('Tidak ada imunisasi program yang lewat jadwal'); return; }
+          if (!await confirmBox('Tandai sudah?', `${due.length} imunisasi program yang jadwalnya sudah lewat akan ditandai "sudah" (tanpa tanggal). Lanjutkan hanya jika sesuai buku KIA.`)) return;
+          due.forEach(v => S.imm[v.id] = { done: true, date: null }); await save(); rerender();
+        } }, 'Tandai semua program yang lewat'))),
+    Object.entries(groups).sort((a, b) => a[0] - b[0]).map(([m, arr]) => {
+      const due = immDue(arr[0]);
+      return h('div', { class: 'imm-group' },
+        h('h4', {}, +m === 0 ? 'Saat lahir' : `Usia ${m} bulan`, h('span', { class: 'tiny muted', style: 'font-weight:500' }, fmtD(due))),
+        arr.map(v => {
+          const st = S.imm[v.id], s = immStatus(v);
+          const cb = h('input', { type: 'checkbox', checked: !!st?.done, 'aria-label': 'Sudah diberikan: ' + v.n });
+          cb.addEventListener('change', async () => {
+            if (cb.checked) S.imm[v.id] = { done: true, date: toISO(today() < due ? today() : today()) }; else delete S.imm[v.id];
+            await save(); rerender();
+          });
+          return h('div', { class: 'imm-item' }, cb,
+            h('div', {}, h('b', { style: 'font-weight:600' }, v.n), ' ', h('span', { class: 'pill' }, v.t)),
+            h('span', { class: 'pill ' + s.cls }, s.label),
+            h('div', { class: 'meta' },
+              v.note ? h('span', { class: 'tiny muted' }, v.note) : null,
+              st?.done ? h('span', { class: 'tiny muted' }, 'Tanggal diberikan:') : null,
+              st?.done ? h('input', { type: 'date', value: st.date || '', max: toISO(today()), min: S.child.dob, 'aria-label': 'Tanggal diberikan ' + v.n, onchange: async e => { S.imm[v.id].date = e.target.value || null; await save(); } }) : null));
+        }));
+    }),
+    h('p', { class: 'tiny muted', style: 'margin-top:10px' }, 'Mengacu jadwal imunisasi program Kemenkes RI dan rekomendasi IDAI. Jadwal dapat berbeda sesuai kebijakan daerah, jenis vaksin, dan kondisi anak — selalu konfirmasikan dengan dokter anak atau bidan.'));
+
+  // pengingat kustom
+  const rt = h('input', { type: 'text', required: true, maxlength: 80, placeholder: 'mis. Kontrol dokter / Posyandu / Vitamin A' });
+  const rdt = h('input', { type: 'date', required: true, min: toISO(today()) });
+  const rf = h('form', { class: 'form-grid', style: 'align-items:end' }, field('Judul', rt), field('Tanggal', rdt), h('button', { class: 'btn primary', type: 'submit' }, icon('plus', 18), 'Tambah'));
+  rf.addEventListener('submit', async e => { e.preventDefault(); S.reminders.push({ id: uid(), title: rt.value.trim(), date: rdt.value, done: false }); await save(); rerender(); });
+  const rems = [...S.reminders].sort((a, b) => a.date < b.date ? -1 : 1);
+  const custom = h('section', { class: 'card' }, h('h3', {}, 'Pengingat lain'),
+    h('p', { class: 'small muted', style: 'margin:-6px 0 12px' }, 'Contoh: kontrol dokter, Posyandu bulanan, vitamin A (Februari & Agustus), obat cacing.'),
+    rf,
+    rems.length ? h('div', { class: 'list', style: 'margin-top:10px' }, rems.map(r => h('div', { class: 'li' },
+      h('label', { class: 'row', style: 'gap:10px;cursor:pointer' }, h('input', { type: 'checkbox', checked: r.done, style: 'width:18px;height:18px;accent-color:var(--primary)', onchange: async e => { r.done = e.target.checked; await save(); rerender(); } }),
+        h('span', { style: r.done ? 'text-decoration:line-through;color:var(--muted)' : '' }, r.title)),
+      h('span', { class: 'row', style: 'gap:6px' }, h('span', { class: 'small muted' }, fmtDate(r.date)), h('button', { class: 'btn sm ghost', type: 'button', 'aria-label': 'Hapus pengingat', onclick: async () => { S.reminders = S.reminders.filter(x => x.id !== r.id); await save(); rerender(); } }, icon('trash', 16)))))) : null);
+
+  return h('div', { class: 'stack' }, ctrl, list, custom);
+}
+function icsEsc(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n'); }
+function exportICS() {
+  const t = today(), stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+  const ymd = d => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+  const ev = [];
+  const add = (id, date, title, desc) => {
+    const nx = new Date(date); nx.setDate(nx.getDate() + 1);
+    ev.push(['BEGIN:VEVENT', `UID:${id}@tumbuh-kembang.local`, `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${ymd(date)}`, `DTEND;VALUE=DATE:${ymd(nx)}`, `SUMMARY:${icsEsc(title)}`, `DESCRIPTION:${icsEsc(desc)}`,
+      'BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${icsEsc(title)}`, 'TRIGGER:-P7D', 'END:VALARM',
+      'BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${icsEsc(title)}`, 'TRIGGER:-PT15H', 'END:VALARM', 'END:VEVENT'].join('\r\n'));
+  };
+  IMM.forEach(v => { if (S.imm[v.id]?.done) return; const d = immDue(v); if (d >= t) add('imm-' + v.id + '-' + slug(S.child.name), d, `Imunisasi ${S.child.name}: ${v.n}`, (v.t === 'P' ? 'Program pemerintah' : 'Anjuran IDAI') + (v.note ? '. ' + v.note : '') + '. Konfirmasi jadwal dengan dokter/bidan.'); });
+  S.reminders.forEach(r => { if (!r.done && parseISO(r.date) >= t) add('rem-' + r.id, parseISO(r.date), `${S.child.name}: ${r.title}`, 'Pengingat dari Catatan Tumbuh Kembang'); });
+  if (!ev.length) { toast('Tidak ada jadwal mendatang untuk diekspor'); return; }
+  const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Catatan Tumbuh Kembang//ID', 'CALSCALE:GREGORIAN', `X-WR-CALNAME:Jadwal ${icsEsc(S.child.name)}`, ...ev, 'END:VCALENDAR'].join('\r\n');
+  download(`jadwal-imunisasi-${slug(S.child.name)}.ics`, ics, 'text/calendar');
+  toast(`${ev.length} jadwal diekspor ke kalender`);
+}
+
+// ---------- Foto ----------
+async function thumbURL(id, full) {
+  const key = (full ? 'img:' : 'th:') + id;
+  if (thumbURLs.has(key)) return thumbURLs.get(key);
+  if (thumbPending.has(key)) return thumbPending.get(key);
+  const pr = (async () => {
+    try {
+      const p = S && S.photos.find(x => x.id === id); if (!p || !KEY) return null;
+      const bytes = await Vault.getPhoto(KEY, p, full); if (!bytes) return null;
+      const u = URL.createObjectURL(new Blob([bytes], { type: 'image/jpeg' }));
+      thumbURLs.set(key, u); return u;
+    } catch { return null; } finally { thumbPending.delete(key); }
+  })();
+  thumbPending.set(key, pr); return pr;
+}
+const thumbPending = new Map();
+function photoStage(p) { const m = Math.max(0, ageMonths(parseISO(S.child.dob), parseISO(p.date))); return PHOTO_STAGES.findIndex(s => m >= s[0] && m < s[1]); }
+function photoTile(p, bare) {
+  const img = h('img', { alt: p.caption || 'Foto ' + fmtDate(p.date), loading: 'lazy' });
+  thumbURL(p.id).then(u => { if (u) img.src = u; });
+  return h('button', { class: 'ph', type: 'button', title: p.caption || fmtDate(p.date), onclick: bare ? null : () => openPhoto(p) }, img, bare ? null : h('span', { class: 'cap' }, p.caption || fmtDate(p.date)));
+}
+function loadImg(src) { return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; }); }
+async function resizeImage(file, max, q) {
+  let src;
+  try { src = await createImageBitmap(file, { imageOrientation: 'from-image' }); }
+  catch { const u = URL.createObjectURL(file); try { src = await loadImg(u); } finally { setTimeout(() => URL.revokeObjectURL(u), 1000); } }
+  const w = src.width, hh = src.height, sc = Math.min(1, max / Math.max(w, hh));
+  const c = document.createElement('canvas'); c.width = Math.round(w * sc); c.height = Math.round(hh * sc);
+  c.getContext('2d').drawImage(src, 0, 0, c.width, c.height);
+  return new Promise(r => c.toBlob(b => r(b), 'image/jpeg', q));
+}
+// Simpan satu gambar (File/Blob) terenkripsi; mengembalikan record foto
+async function storePhoto(blob, meta) {
+  if (MODE.cloud && !MODE.assets) throw new Error('Hanya Editor yang bisa menambah foto');
+  const big = await resizeImage(blob, MODE.cloud ? 1400 : 1600, 0.85), th = await resizeImage(blob, 360, 0.78);
+  const id = uid();
+  const extra = await Vault.putPhoto(KEY, id, new Uint8Array(await big.arrayBuffer()), new Uint8Array(await th.arrayBuffer()));
+  const date = meta.date < S.child.dob ? S.child.dob : meta.date;
+  const p = { id, date, caption: meta.caption || '', link: meta.link || null, src: meta.src || null, added: Date.now(), ...extra };
+  S.photos.push(p); return p;
+}
+function pickFiles(cb, accept = 'image/*', multiple = true) {
+  const inp = h('input', { type: 'file', accept, multiple, hidden: true });
+  inp.addEventListener('change', () => { if (inp.files.length) cb([...inp.files]); inp.remove(); });
+  document.body.append(inp); inp.click();
+}
+const linkedPhotos = link => S.photos.filter(p => p.link && p.link.type === link.type && p.link.id === link.id).sort((a, b) => a.date < b.date ? -1 : 1);
+// Deretan thumbnail kecil + tombol tambah, untuk foto yang tertaut ke kontrol / milestone
+function miniPhotos(link, preset, max = 3) {
+  const ps = linkedPhotos(link);
+  const stop = e => { e.preventDefault(); e.stopPropagation(); };
+  const tiles = ps.slice(0, max).map(p => { const t = photoTile(p, true); t.addEventListener('click', stop, true); t.addEventListener('click', () => openPhoto(p)); return t; });
+  return h('div', { class: 'mini-ph' }, tiles, ps.length > max ? h('span', { class: 'tiny muted' }, '+' + (ps.length - max)) : null,
+    h('button', { class: 'add-ph', type: 'button', title: 'Tambah foto', 'aria-label': 'Tambah foto', onclick: e => { stop(e); pickFiles(f => addPhotos(f, Object.assign({ link }, preset()))); } }, icon('photo', 18)));
+}
+function linkLabel(link) {
+  if (!link) return null;
+  if (link.type === 'm') { const m = S.measurements.find(x => x.id === link.id); return m ? `Kontrol ${fmtDate(m.date)}${m.place ? ' · ' + m.place : ''}` : null; }
+  if (link.type === 'ms') { for (const s of MS) { const it = s.items.find(i => i.id === link.id); if (it) return `Milestone: ${it.t}`; } }
+  return null;
+}
+async function addPhotos(files, preset) {
+  files = [...files].filter(f => f.type.startsWith('image/'));
+  if (!files.length) return;
+  if (preset) {
+    toast('Mengenkripsi foto…'); let n = 0;
+    for (const f of files) { try { await storePhoto(f, preset); n++; } catch (e) { toast('Gagal memproses ' + f.name + ': ' + (e.message || e.code || e)); } }
+    await save(); toast(`${n} foto tertaut & terenkripsi`); rerender(); return;
+  }
+  const dIn = h('input', { type: 'date', required: true, value: toISO(new Date(files[0].lastModified || Date.now())), max: toISO(today()) });
+  const useFile = h('input', { type: 'checkbox', checked: files.length > 1 });
+  const cap = h('input', { type: 'text', maxlength: 120, placeholder: 'mis. Pertama kali berjalan' });
+  const body = h('div', { class: 'stack', style: 'gap:12px' },
+    h('p', { class: 'small muted' }, `${files.length} foto akan diperkecil (maks. 1600 px) dan dienkripsi sebelum disimpan.`),
+    field('Tanggal foto', dIn, 'Menentukan tahap usia di galeri'),
+    files.length > 1 ? h('label', { class: 'row small', style: 'gap:8px' }, useFile, 'Pakai tanggal file masing-masing (jika tersedia)') : null,
+    field('Keterangan', cap));
+  if (await modal('Tambah foto', body, [{ label: 'Batal', value: 'cancel' }, { label: 'Simpan & enkripsi', value: 'ok', cls: 'primary' }]) !== 'ok') return;
+  toast('Memproses foto…');
+  let n = 0;
+  for (const f of files) {
+    try {
+      let date = dIn.value;
+      if (useFile.checked && f.lastModified) { const fd = new Date(f.lastModified); if (fd <= new Date()) date = toISO(fd); }
+      await storePhoto(f, { date, caption: cap.value.trim() }); n++;
+    } catch (e) { toast('Gagal memproses ' + f.name + ': ' + (e.message || e.code || e)); }
+  }
+  await save(); toast(`${n} foto tersimpan & terenkripsi`); rerender();
+}
+async function openPhoto(p) {
+  const img = h('img', { class: 'lb-img', alt: p.caption || 'Foto' });
+  thumbURL(p.id, true).then(u => { if (u) img.src = u; });
+  const dIn = h('input', { type: 'date', value: p.date, max: toISO(today()), min: S.child.dob });
+  const cap = h('input', { type: 'text', value: p.caption || '', maxlength: 120 });
+  const body = h('div', { class: 'stack', style: 'gap:12px' }, img,
+    h('p', { class: 'small muted' }, `Usia saat foto: ${ageText(parseISO(S.child.dob), parseISO(p.date))}`, linkLabel(p.link) ? ` · ${linkLabel(p.link)}` : ''),
+    h('div', { class: 'form-grid' }, field('Tanggal', dIn), field('Keterangan', cap)));
+  const r = await modal(p.caption || 'Foto ' + fmtDate(p.date), body, [
+    { label: 'Hapus', value: 'del', cls: 'danger', left: true }, { label: 'Unduh', value: 'dl' }, { label: 'Tutup', value: 'cancel' }, { label: 'Simpan', value: 'save', cls: 'primary' }], { wide: true });
+  if (r === 'save') { p.date = dIn.value || p.date; p.caption = cap.value.trim(); await save(); rerender(); }
+  else if (r === 'dl') { const b = await Vault.getPhoto(KEY, p, true).catch(() => null); if (b) download(`${slug(S.child.name)}-${p.date}.jpg`, new Blob([b], { type: 'image/jpeg' })); else toast('Foto tidak bisa dimuat'); }
+  else if (r === 'del') {
+    if (!await confirmBox('Hapus foto?', MODE.cloud ? 'Foto ini akan dihapus untuk semua anggota keluarga.' : 'Foto ini akan dihapus dari perangkat ini.', 'Hapus', 'danger')) return;
+    S.photos = S.photos.filter(x => x.id !== p.id); await save();
+    await Vault.delPhoto(p);
+    ['img:', 'th:'].forEach(k => { const u = thumbURLs.get(k + p.id); if (u) { URL.revokeObjectURL(u); thumbURLs.delete(k + p.id); } });
+    rerender();
+  }
+}
+function viewPhotos() {
+  const inp = h('input', { type: 'file', accept: 'image/*', multiple: true, hidden: true, onchange: e => { addPhotos(e.target.files); e.target.value = ''; } });
+  const dz = h('div', { class: 'dropzone' }, icon('photo', 28), h('p', { style: 'margin:6px 0 10px' }, 'Seret foto ke sini, atau'),
+    h('button', { class: 'btn primary', type: 'button', onclick: () => inp.click() }, icon('plus', 18), 'Pilih foto'), inp,
+    h('p', { class: 'tiny', style: 'margin-top:10px' }, 'Foto dienkripsi dan hanya tersimpan di perangkat ini.'));
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+  dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('over'); addPhotos(e.dataTransfer.files); });
+  const seg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Tampilan galeri' },
+    [['tl', 'Linimasa kontrol'], ['stage', 'Per tahap usia']].map(([k, l]) => h('button', { type: 'button', 'aria-pressed': String(photoMode === k), onclick: () => { photoMode = k; rerender(); } }, l)));
+  const head = h('div', { class: 'spread' }, seg, h('span', { class: 'small muted' }, `${S.photos.length} foto · ${S.measurements.length} kontrol`));
+  let body;
+  if (photoMode === 'tl') {
+    const dob = parseISO(S.child.dob);
+    const rows = sorted().reverse();
+    body = rows.length ? h('div', { class: 'tl' }, rows.map(r => {
+      const link = { type: 'm', id: r.id }, ps = linkedPhotos(link);
+      const preset = () => ({ date: r.date, caption: r.place ? 'Kontrol di ' + r.place : 'Kontrol ' + fmtDate(r.date) });
+      const meas = [['h', r.height, 'TB'], ['w', r.weight, 'BB'], ['c', r.head, 'LK']].filter(x => x[1]).map(([k, v, ab]) => {
+        const z = zOf(k, r.date, v), c = z != null ? catOf(k, z) : null;
+        return h('span', { class: 'pill ' + (c ? c.cls : '') }, `${ab} ${fmtNum(v, 2)} ${KIND[k].unit}`);
+      });
+      if (r.temp) meas.push(h('span', { class: 'pill' }, `Suhu ${fmtNum(r.temp, 1)}°C`));
+      return h('section', { class: 'card tl-item' },
+        h('div', { class: 'tl-photos' }, ps.map(p => photoTile(p)),
+          h('button', { class: 'add-ph', type: 'button', onclick: () => pickFiles(f => addPhotos(f, Object.assign({ link }, preset()))) }, h('span', { class: 'tiny', style: 'display:flex;flex-direction:column;align-items:center;gap:4px' }, icon('photo', 22), ps.length ? 'Tambah' : 'Tambah foto'))),
+        h('div', { class: 'stack', style: 'gap:8px' },
+          h('div', {}, h('h3', {}, fmtDate(r.date)), h('p', { class: 'small muted' }, `Usia ${ageText(dob, parseISO(r.date))}`, r.place ? ` · ${r.place}` : '')),
+          h('div', { class: 'row', style: 'gap:6px' }, meas),
+          r.note ? h('p', { class: 'tl-note' }, r.note) : null));
+    })) : h('p', { class: 'muted small' }, 'Belum ada data kontrol. Catat pengukuran atau impor dari Excel di menu Pertumbuhan.');
+  } else {
+    const groups = {};
+    S.photos.forEach(p => { const i = photoStage(p); (groups[i] = groups[i] || []).push(p); });
+    body = Object.keys(groups).length ? h('div', { class: 'stack' }, Object.keys(groups).map(Number).sort((a, b) => b - a).map(i => h('section', { class: 'card' },
+      h('div', { class: 'card-head' }, h('h3', { style: 'margin:0' }, PHOTO_STAGES[i][2]), h('span', { class: 'pill' }, groups[i].length + ' foto')),
+      h('div', { class: 'gal' }, groups[i].sort((a, b) => a.date < b.date ? -1 : 1).map(p => photoTile(p)))))) :
+      h('p', { class: 'muted small', style: 'text-align:center' }, 'Galeri dikelompokkan otomatis per tahap usia berdasarkan tanggal foto.');
+  }
+  return h('div', { class: 'stack' }, h('section', { class: 'card' }, dz), head, body);
+}
+
+// ---------- Laporan & ekspor ----------
+function buildReport() {
+  const c = S.child, dob = parseISO(c.dob), t = today();
+  const [lh] = latestOf('height'), [lw] = latestOf('weight'), [lk] = latestOf('head');
+  const zh = lh && zOf('h', lh.date, lh.height), zw = lw && zOf('w', lw.date, lw.weight);
+  const { am, next } = stageInfo();
+  const stages = MS.filter(s => s.m <= am + 0.5 || (next && s.m === next.m));
+  const kv = rows => h('table', { class: 'kv' }, h('tbody', {}, rows.map(([k, v]) => h('tr', {}, h('td', {}, k), h('td', {}, v)))));
+  return h('div', { class: 'paper' },
+    h('div', { class: 'rp-head' },
+      h('div', {}, h('h1', {}, 'Laporan Tumbuh Kembang Anak'), h('p', { class: 'muted' }, `Disusun orang tua untuk konsultasi dokter anak · ${fmtD(t)}`)),
+      h('div', { class: 'brand-mark', style: 'flex:none' }, icon('sprout', 20))),
+    h('div', { class: 'grid g2', style: 'margin-top:12px' },
+      h('div', {}, h('h2', {}, 'Identitas'), kv([['Nama', c.name], ['Jenis kelamin', c.sex === 'L' ? 'Laki-laki' : 'Perempuan'], ['Tanggal lahir', fmtDate(c.dob)], ['Usia saat laporan', ageText(dob, t)]])),
+      h('div', {}, h('h2', {}, 'Status pertumbuhan terakhir'), kv([
+        ['Tinggi badan', lh ? `${fmtNum(lh.height)} cm (${fmtDate(lh.date)})` : '—'],
+        ['TB/U', zh != null ? `z ${fmtZ(zh)} SD — ${catH(zh).label}` : '—'],
+        ['Berat badan', lw ? `${fmtNum(lw.weight, 2)} kg (${fmtDate(lw.date)})` : '—'],
+        ['BB/U', zw != null ? `z ${fmtZ(zw)} SD — ${catW(zw).label}` : '—'],
+        ['Lingkar kepala', lk ? `${fmtNum(lk.head)} cm (${fmtDate(lk.date)})` : '—'],
+        ['LK/U', lk && zOf('c', lk.date, lk.head) != null ? `z ${fmtZ(zOf('c', lk.date, lk.head))} SD — ${catC(zOf('c', lk.date, lk.head)).label}` : '—']]))),
+    h('h2', { class: 'pb' }, 'Grafik pertumbuhan (WHO)'),
+    h('div', { class: 'rp-charts' },
+      h('div', {}, h('p', { class: 'small', style: 'font-weight:600' }, 'Tinggi badan menurut umur'), h('div', { html: growthChartSVG('h', 'report', { noToday: true }) })),
+      h('div', {}, h('p', { class: 'small', style: 'font-weight:600' }, 'Berat badan menurut umur'), h('div', { html: growthChartSVG('w', 'report', { noToday: true }) })),
+      S.measurements.some(m => m.head) ? h('div', {}, h('p', { class: 'small', style: 'font-weight:600' }, 'Lingkar kepala menurut umur'), h('div', { html: growthChartSVG('c', 'report', { noToday: true }) })) : null),
+    h('h2', { class: 'pb' }, 'Riwayat pengukuran'),
+    S.measurements.length ? measureTable(sorted(), false) : h('p', { class: 'muted' }, 'Belum ada data.'),
+    h('h2', { class: 'pb' }, 'Status imunisasi'),
+    h('table', {}, h('thead', {}, h('tr', {}, h('th', {}, 'Jadwal'), h('th', {}, 'Vaksin'), h('th', {}, 'Jenis'), h('th', {}, 'Status'), h('th', {}, 'Tgl diberikan'))),
+      h('tbody', {}, IMM.filter(v => S.imm[v.id]?.done || immDue(v) <= addMonths(t, 6)).map(v => {
+        const st = S.imm[v.id];
+        return h('tr', {}, h('td', { style: 'white-space:nowrap' }, v.m ? `${v.m} bln` : 'Lahir'), h('td', {}, v.n), h('td', {}, v.t === 'P' ? 'Program' : 'IDAI'),
+          h('td', {}, st?.done ? 'Sudah' : immDue(v) < t ? 'Belum tercatat' : 'Terjadwal ' + fmtD(immDue(v))), h('td', {}, st?.date ? fmtDate(st.date) : st?.done ? '(tanpa tgl)' : '—'));
+      }))),
+    h('h2', { class: 'pb' }, 'Perkembangan (milestone)'),
+    h('table', {}, h('thead', {}, h('tr', {}, h('th', {}, 'Tahap'), h('th', { class: 'num' }, 'Tercapai'), h('th', {}, 'Belum tercapai / belum dicentang'))),
+      h('tbody', {}, stages.map(s => {
+        const miss = s.items.filter(i => !S.milestones[i.id]?.done);
+        return h('tr', {}, h('td', { style: 'white-space:nowrap' }, s.label), h('td', { class: 'num' }, `${s.items.length - miss.length}/${s.items.length}`), h('td', {}, miss.length ? miss.map(i => i.t).join('; ') : 'Semua tercapai'));
+      }))),
+    h('h2', { class: 'pb' }, 'Catatan & pertanyaan orang tua'),
+    h('p', { style: 'white-space:pre-wrap' }, S.notes || '—'),
+    h('p', { class: 'tiny muted', style: 'margin-top:20px;border-top:1px solid var(--border);padding-top:8px' },
+      'Z-score dihitung dengan pendekatan WHO Child Growth Standards 2006 (interpolasi median & simpangan baku) dan kategori Permenkes RI No. 2/2020. Laporan ini adalah catatan orang tua, bukan diagnosis medis.'));
+}
+function viewReport() {
+  const notes = h('textarea', { placeholder: 'mis. Anak sering susah makan sayur sejak bulan lalu; apakah perlu vitamin tambahan?', maxlength: 3000 });
+  notes.value = S.notes || '';
+  let tmo; notes.addEventListener('input', () => { S.notes = notes.value; clearTimeout(tmo); tmo = setTimeout(() => { save(); preview.replaceChildren(buildReport()); }, 600); });
+  const preview = h('div', {}, buildReport());
+  const actions = h('section', { class: 'card' },
+    h('h3', {}, 'Ekspor untuk dokter anak'),
+    h('div', { class: 'grid g2' },
+      h('div', { class: 'stack', style: 'gap:10px' },
+        field('Catatan / pertanyaan untuk dokter (ikut tercetak)', notes),
+        h('div', { class: 'row' },
+          h('button', { class: 'btn primary', type: 'button', onclick: printReport }, icon('print', 18), MODE.cloud ? 'Unduh laporan siap cetak' : 'Cetak / Simpan PDF'),
+          h('button', { class: 'btn', type: 'button', onclick: exportCSV }, icon('down', 18), 'Data pengukuran (CSV)'))),
+      h('div', { class: 'stack', style: 'gap:10px' },
+        h('div', { class: 'secure-note' }, icon('shield', 18), h('div', {}, h('b', {}, 'Backup terenkripsi. '), 'Simpan cadangan seluruh data + foto dalam satu file terenkripsi. Hanya bisa dibuka dengan kata sandi Anda.')),
+        h('div', { class: 'row' },
+          h('button', { class: 'btn', type: 'button', onclick: exportBackup }, icon('down', 18), 'Unduh backup'),
+          h('button', { class: 'btn', type: 'button', onclick: () => restoreBackup() }, icon('up', 18), 'Pulihkan backup')),
+        h('p', { class: 'tiny muted' }, 'Laporan PDF & CSV tidak terenkripsi — bagikan langsung ke dokter dan hapus salinan yang tidak diperlukan.'))));
+  return h('div', { class: 'stack' }, actions, h('div', {}, h('h3', { style: 'margin-bottom:10px' }, 'Pratinjau laporan'), preview));
+}
+function printReport() {
+  if (MODE.cloud) { // bingkai claude.ai tidak bisa membuka dialog cetak: unduh laporan sebagai HTML siap cetak
+    const css = [...document.querySelectorAll('style')].map(s => s.textContent).join('\n');
+    const html = `<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laporan Tumbuh Kembang ${S.child.name.replace(/[<>&]/g, '')} ${toISO(today())}</title><style>${css}
+body{background:#f1eee7;padding:24px 16px} .paper{max-width:900px;margin:0 auto} .noprint{display:block;max-width:900px;margin:0 auto 12px;text-align:right}
+@media print{body{background:#fff;padding:0}.noprint{display:none!important}}</style></head><body><div class="noprint"><button class="btn primary" onclick="window.print()">Cetak / Simpan PDF</button></div>${buildReport().outerHTML}</body></html>`;
+    download(`laporan-tumbuh-kembang-${slug(S.child.name)}-${toISO(today())}.html`, html, 'text/html');
+    return;
+  }
+  $('#print-root').replaceChildren(buildReport());
+  const prev = document.title;
+  document.title = `Laporan Tumbuh Kembang ${S.child.name} ${toISO(today())}`;
+  window.print();
+  setTimeout(() => { document.title = prev; $('#print-root').replaceChildren(); }, 500);
+}
+function exportCSV() {
+  const dob = parseISO(S.child.dob), n = (v, d) => v == null ? '' : Number(v).toFixed(d).replace('.', ',');
+  const q = s => `"${String(s ?? '').replace(/"/g, '""')}"`;
+  const lines = [['Tanggal', 'Usia (bulan)', 'Tinggi (cm)', 'Z TB/U', 'Kategori TB/U', 'Berat (kg)', 'Z BB/U', 'Kategori BB/U', 'Lingkar kepala (cm)', 'Z LK/U', 'Kategori LK/U', 'Suhu (°C)', 'Lokasi', 'Catatan'].map(q).join(';')];
+  sorted().forEach(r => {
+    const zh = r.height ? zOf('h', r.date, r.height) : null, zw = r.weight ? zOf('w', r.date, r.weight) : null, zl = r.head ? zOf('c', r.date, r.head) : null;
+    lines.push([r.date, n(ageMonths(dob, parseISO(r.date)), 1), n(r.height, 1), zh != null ? n(zh, 2) : '', zh != null ? catH(zh).label : '', n(r.weight, 2), zw != null ? n(zw, 2) : '', zw != null ? catW(zw).label : '', n(r.head, 1), zl != null ? n(zl, 2) : '', zl != null ? catC(zl).label : '', n(r.temp, 1), r.place, r.note].map(q).join(';'));
+  });
+  download(`pengukuran-${slug(S.child.name)}-${toISO(today())}.csv`, '\ufeff' + lines.join('\r\n'), 'text/csv;charset=utf-8');
+}
+async function exportBackup() {
+  await saveChain;
+  toast('Menyiapkan backup…');
+  const records = {}, put = async (name, bytes) => { const r = await encBytes(KEY, bytes); records[name] = { iv: toB64(r.iv), ct: toB64(r.ct) }; };
+  const st = JSON.parse(JSON.stringify(S)); st.photos.forEach(p => delete p.a);
+  for (const p of S.photos) {
+    try { const big = await Vault.getPhoto(KEY, p, true), th = await Vault.getPhoto(KEY, p, false); if (big && th) { await put('img:' + p.id, big); await put('th:' + p.id, th); } } catch (e) {}
+  }
+  await put('state', te.encode(JSON.stringify(st)));
+  const out = { app: 'catatan-tumbuh-kembang', v: 1, created: new Date().toISOString(), salt: toB64(META.salt), iter: META.iter, records };
+  download(`backup-${slug(S.child.name)}-${toISO(today())}.tkenc.json`, JSON.stringify(out), 'application/json');
+  toast('Backup terenkripsi diunduh');
+}
+function restoreBackup() {
+  const inp = h('input', { type: 'file', accept: '.json,application/json' });
+  inp.addEventListener('change', async () => {
+    const file = inp.files[0]; if (!file) return;
+    let data;
+    try { data = JSON.parse(await file.text()); if (data.app !== 'catatan-tumbuh-kembang' || !data.records?.state) throw 0; }
+    catch { toast('File backup tidak valid'); return; }
+    if (MODE.cloud && !MODE.canWrite) { toast('Hanya Editor yang bisa memulihkan backup'); return; }
+    const p = h('input', { type: 'password', required: true });
+    const r = await modal('Pulihkan backup', h('div', { class: 'stack', style: 'gap:12px' },
+      h('p', { class: 'small' }, `Backup dibuat ${new Date(data.created).toLocaleString('id-ID')}. `, h('b', {}, MODE.cloud ? 'Seluruh isi brankas keluarga akan diganti, dan kata sandi keluarga menjadi kata sandi backup ini.' : 'Semua data di perangkat ini akan diganti.')),
+      field('Kata sandi backup', p)), [{ label: 'Batal', value: 'cancel' }, { label: 'Pulihkan', value: 'ok', cls: 'danger' }]);
+    if (r !== 'ok') return;
+    let k, st, recs = {};
+    try {
+      const salt = fromB64(data.salt); k = await deriveKey(p.value, salt, data.iter);
+      for (const [key, v] of Object.entries(data.records)) recs[key] = { iv: fromB64(v.iv), ct: fromB64(v.ct) };
+      st = await decJSON(k, recs.state);
+    } catch { toast('Kata sandi salah atau file rusak'); return; }
+    try {
+      toast('Memulihkan & mengenkripsi…');
+      const meta = { v: 1, salt: fromB64(data.salt), iter: data.iter, kid: uid() };
+      st.settings = Object.assign({ autolock: 10, remindDays: 7, notif: false }, st.settings); st.notified = st.notified || {}; st.reminders = st.reminders || [];
+      const photos = await collectPhotos(st, async (ph, full) => { const rec = recs[(full ? 'img:' : 'th:') + ph.id]; return rec ? decBytes(k, rec) : null; });
+      timers.forEach(clearInterval); timers = [];
+      META = meta;
+      await Vault.rebuild(k, meta, st, photos);
+      thumbURLs.forEach(u => URL.revokeObjectURL(u)); thumbURLs.clear();
+      KEY = k; S = st;
+      enterApp(); toast(`Backup dipulihkan: ${st.measurements.length} kontrol, ${st.photos.length} foto`);
+    } catch (e) { toast('Gagal memulihkan: ' + (e.message || e.code || e)); }
+  });
+  inp.click();
+}
+
+// ---------- Impor data historis (Excel .xlsx / CSV) ----------
+// Dibaca sepenuhnya di browser; tidak ada yang diunggah ke mana pun.
+async function unzip(buf) {
+  const u8 = new Uint8Array(buf), dv = new DataView(buf);
+  let e = -1;
+  for (let i = u8.length - 22; i >= Math.max(0, u8.length - 65557); i--) if (dv.getUint32(i, true) === 0x06054b50) { e = i; break; }
+  if (e < 0) throw new Error('File bukan .xlsx yang valid');
+  const n = dv.getUint16(e + 10, true); let p = dv.getUint32(e + 16, true);
+  const files = {};
+  for (let i = 0; i < n && dv.getUint32(p, true) === 0x02014b50; i++) {
+    const nlen = dv.getUint16(p + 28, true), xlen = dv.getUint16(p + 30, true), clen = dv.getUint16(p + 32, true);
+    files[td.decode(u8.subarray(p + 46, p + 46 + nlen))] = { method: dv.getUint16(p + 10, true), csize: dv.getUint32(p + 20, true), off: dv.getUint32(p + 42, true) };
+    p += 46 + nlen + xlen + clen;
+  }
+  return {
+    has: name => !!files[name],
+    async get(name) {
+      const f = files[name]; if (!f) return null;
+      const start = f.off + 30 + dv.getUint16(f.off + 26, true) + dv.getUint16(f.off + 28, true);
+      const data = u8.subarray(start, start + f.csize);
+      if (f.method === 0) return data.slice();
+      if (f.method !== 8) throw new Error('Kompresi zip tidak didukung');
+      return new Uint8Array(await new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer());
+    },
+    async xml(name) { const b = await this.get(name); return b ? new DOMParser().parseFromString(td.decode(b), 'application/xml') : null; }
+  };
+}
+const byTag = (node, tag) => [...node.getElementsByTagNameNS('*', tag)];
+const attrLocal = (el, local) => { for (const a of el.attributes) if (a.localName === local) return a.value; return null; };
+function resolvePath(dir, t) {
+  if (t.startsWith('/')) return t.slice(1);
+  const out = []; for (const s of (dir + t).split('/')) { if (s === '..') out.pop(); else if (s && s !== '.') out.push(s); }
+  return out.join('/');
+}
+async function relsOf(zip, part) {
+  const dir = part.slice(0, part.lastIndexOf('/') + 1), x = await zip.xml(dir + '_rels/' + part.slice(dir.length) + '.rels'), m = {};
+  if (x) byTag(x, 'Relationship').forEach(r => { if (r.getAttribute('TargetMode') !== 'External') m[r.getAttribute('Id')] = resolvePath(dir, r.getAttribute('Target')); });
+  return m;
+}
+const colIdx = ref => { let n = 0; for (const ch of ref.replace(/\d+/g, '')) n = n * 26 + ch.charCodeAt(0) - 64; return n - 1; };
+async function readXlsx(file) {
+  if (!('DecompressionStream' in window)) throw new Error('Browser terlalu lama untuk membaca .xlsx — simpan sebagai CSV');
+  const zip = await unzip(await file.arrayBuffer());
+  const wb = await zip.xml('xl/workbook.xml'); if (!wb) throw new Error('workbook.xml tidak ditemukan');
+  const wbRels = await relsOf(zip, 'xl/workbook.xml');
+  const sheets = byTag(wb, 'sheet').map(s => ({ name: s.getAttribute('name'), path: wbRels[attrLocal(s, 'id')] })).filter(s => s.path);
+  const ssx = await zip.xml('xl/sharedStrings.xml');
+  const ss = ssx ? byTag(ssx, 'si').map(si => byTag(si, 't').filter(t => t.parentNode.localName !== 'rPh').map(t => t.textContent).join('')) : [];
+  const readSheet = async s => {
+    const x = await zip.xml(s.path), grid = [];
+    byTag(x, 'row').forEach(row => {
+      const r = +row.getAttribute('r'), cells = [];
+      byTag(row, 'c').forEach(c => {
+        const t = c.getAttribute('t'), v = byTag(c, 'v')[0]?.textContent;
+        let val = null;
+        if (t === 's') val = ss[+v] ?? null;
+        else if (t === 'inlineStr') val = byTag(c, 't').map(n => n.textContent).join('');
+        else if (t === 'str' || t === 'e') val = v ?? null;
+        else if (t === 'b') val = v === '1';
+        else if (v != null && v !== '') val = Number(v);
+        cells[colIdx(c.getAttribute('r'))] = val;
+      });
+      grid.push({ r, cells });
+    });
+    return grid;
+  };
+  // pilih sheet: yang namanya "monitoring", atau sheet pertama yang punya header Tanggal + Berat/Tinggi
+  const order = [...sheets].sort((a, b) => (/monitor|tumbuh|pengukuran/i.test(b.name) ? 1 : 0) - (/monitor|tumbuh|pengukuran/i.test(a.name) ? 1 : 0));
+  for (const s of order) {
+    const grid = await readSheet(s), hdr = findHeader(grid);
+    if (!hdr) continue;
+    // gambar di sheet (drawing anchors) → per baris
+    const photosByRow = {}, srels = await relsOf(zip, s.path);
+    for (const dPath of Object.values(srels).filter(p => /drawings\/drawing\d+\.xml$/.test(p))) {
+      const dx = await zip.xml(dPath), drels = await relsOf(zip, dPath);
+      if (!dx) continue;
+      [...byTag(dx, 'oneCellAnchor'), ...byTag(dx, 'twoCellAnchor'), ...byTag(dx, 'absoluteAnchor')].forEach(an => {
+        const from = byTag(an, 'from')[0], blip = byTag(an, 'blip')[0];
+        if (!from || !blip) return;
+        const row = +byTag(from, 'row')[0].textContent + 1, col = +byTag(from, 'col')[0].textContent;
+        const media = drels[attrLocal(blip, 'embed')];
+        if (!media) return;
+        if (hdr.map.photo != null && col !== hdr.map.photo) return;
+        (photosByRow[row] = photosByRow[row] || []).push(media);
+      });
+    }
+    return { source: `${file.name} · sheet "${s.name}"`, rows: gridToRows(grid, hdr, photosByRow), zip };
+  }
+  throw new Error('Tidak menemukan tabel dengan kolom Tanggal dan Berat/Tinggi');
+}
+function parseCSV(text) {
+  const hl = text.split('\n').find(l => /tanggal|date/i.test(l)) || text.split('\n')[0];
+  const sep = (hl.match(/;/g) || []).length > (hl.match(/,/g) || []).length ? ';' : ',';
+  const rows = []; let row = [], f = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true;
+    else if (c === sep) { row.push(f); f = ''; }
+    else if (c === '\n') { row.push(f); rows.push(row); row = []; f = ''; }
+    else if (c !== '\r') f += c;
+  }
+  row.push(f); rows.push(row);
+  return rows.map((cells, i) => ({ r: i + 1, cells }));
+}
+function findHeader(grid) {
+  for (const { r, cells } of grid.slice(0, 40)) {
+    const txt = cells.map(c => typeof c === 'string' ? c.trim().toLowerCase() : '');
+    if (!txt.some(t => /tanggal|^tgl|^date/.test(t)) || !txt.some(t => /berat|tinggi|panjang|weight|height/.test(t))) continue;
+    const map = {}, ideal = /ideal|batas|bawah|atas|min|max|normal|median/;
+    txt.forEach((t, i) => {
+      if (!t) return;
+      const set = (k) => { if (map[k] == null) map[k] = i; };
+      if (/tanggal|^tgl|^date/.test(t)) set('date');
+      else if (ideal.test(t)) return;
+      else if (/^berat|^bb\b|weight/.test(t)) set('weight');
+      else if (/^tinggi|^tb\b|^panjang|^pb\b|height|length/.test(t)) set('height');
+      else if (/lingkar kepala|^lk\b|head/.test(t)) set('head');
+      else if (/suhu|temp/.test(t)) set('temp');
+      else if (/lokasi|tempat|faskes|location/.test(t)) set('place');
+      else if (/catatan|keterangan|note/.test(t)) set('note');
+      else if (/foto|photo|gambar/.test(t)) set('photo');
+    });
+    if (map.date != null) return { r, map };
+  }
+  return null;
+}
+const MONTHS = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, mei: 4, jun: 5, jul: 6, aug: 7, agu: 7, agt: 7, sep: 8, oct: 9, okt: 9, nov: 10, dec: 11, des: 11 };
+function toDateISO(v) {
+  if (typeof v === 'number' && v > 20000 && v < 80000) { const d = new Date(1899, 11, 30); d.setDate(d.getDate() + Math.floor(v)); return toISO(d); }
+  if (typeof v !== 'string') return null;
+  const s = v.trim().toLowerCase();
+  let m;
+  if ((m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) return toISO(new Date(+m[1], m[2] - 1, +m[3]));
+  if ((m = s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/))) return toISO(new Date(+m[3], m[2] - 1, +m[1]));
+  if ((m = s.match(/^(\d{1,2})\s+([a-z]{3})[a-z]*\.?\s+(\d{4})/)) && MONTHS[m[2]] != null) return toISO(new Date(+m[3], MONTHS[m[2]], +m[1]));
+  if ((m = s.match(/^([a-z]{3})[a-z]*\.?\s+(\d{1,2}),?\s+(\d{4})/)) && MONTHS[m[1]] != null) return toISO(new Date(+m[3], MONTHS[m[1]], +m[2]));
+  return null;
+}
+const toNum = v => { if (typeof v === 'number') return v > 0 ? v : null; if (typeof v !== 'string') return null; const n = parseFloat(v.replace(',', '.')); return n > 0 ? n : null; };
+function gridToRows(grid, hdr, photosByRow = {}) {
+  const { map } = hdr, out = [];
+  grid.filter(g => g.r > hdr.r).forEach(({ r, cells }) => {
+    const date = toDateISO(cells[map.date]);
+    if (!date) return;
+    const g = k => map[k] != null ? cells[map[k]] : null;
+    const str = k => { const v = g(k); return v == null ? '' : String(v).trim(); };
+    const row = { date, height: toNum(g('height')), weight: toNum(g('weight')), head: toNum(g('head')), temp: toNum(g('temp')), place: str('place'), note: str('note'), photos: photosByRow[r] || [] };
+    if (row.weight) row.weight = Math.round(row.weight * 1000) / 1000;
+    if (row.height || row.weight || row.head || row.note || row.photos.length) out.push(row);
+  });
+  return out.sort((a, b) => a.date < b.date ? -1 : 1);
+}
+// Deteksi imunisasi yang disebut di catatan, mis. "vaksin DPT-2, Polio-3, RV-2, dan PCV-2"
+function detectImm(rows) {
+  const found = {};
+  const take = (id, date) => { if (IMM.some(v => v.id === id) && !found[id]) found[id] = date; };
+  rows.forEach(r => {
+    const t = r.note || '';
+    if (!/imunisasi|vaksin|vaccin|suntik|tetes/i.test(t)) return;
+    let m;
+    if (/\bbcg\b/i.test(t)) take('bcg', r.date);
+    if (/\b(hb[\s-]?0|hepatitis\s*b)\b/i.test(t)) take('hb0', r.date);
+    for (m of t.matchAll(/polio(?:\s*tetes)?[\s-]*(\d)/gi)) take('opv' + m[1], r.date);
+    for (m of t.matchAll(/ipv\)?[\s-]*(\d)/gi)) take('ipv' + m[1], r.date);
+    for (m of t.matchAll(/dpt(?:-hb-hib)?[\s-]*(\d)/gi)) take('dpt' + m[1], r.date);
+    for (m of t.matchAll(/\b(?:rv|rotavirus)[\s-]*(\d)/gi)) take('rv' + m[1], r.date);
+    for (m of t.matchAll(/\bpcv[\s-]*(\d)/gi)) take('pcv' + m[1], r.date);
+    if (/campak|rubel|\bmr\b/i.test(t)) { const mm = t.match(/\bmr[\s-]*(\d)/i); take(mm ? 'mr' + mm[1] : found.mr1 ? 'mr2' : 'mr1', r.date); }
+    if (/hepatitis\s*a/i.test(t)) take(found.hepa1 ? 'hepa2' : 'hepa1', r.date);
+    if (/varisela|cacar air/i.test(t)) take('var', r.date);
+    if (/tifoid|typhoid/i.test(t)) take(found.tif1 ? 'tif2' : 'tif1', r.date);
+    if (/japanese|\bje\b/i.test(t)) take('je', r.date);
+    if (/influenza|\bflu\b/i.test(t)) { const id = ['flu1', 'flu2', 'flu3', 'flu4', 'flu5', 'flu6'].find(x => !found[x]); if (id) take(id, r.date); }
+  });
+  return found;
+}
+async function importHistory(file) {
+  if (!file) return;
+  let res;
+  try {
+    toast('Membaca ' + file.name + '…');
+    if (/\.xlsx$/i.test(file.name)) res = await readXlsx(file);
+    else {
+      const grid = parseCSV(await file.text()), hdr = findHeader(grid);
+      if (!hdr) throw new Error('Tidak menemukan kolom Tanggal dan Berat/Tinggi');
+      res = { source: file.name, rows: gridToRows(grid, hdr), zip: null };
+    }
+  } catch (e) { modal('Impor gagal', h('p', {}, `File "${file.name}" tidak bisa dibaca: ${e.message}`), [{ label: 'Tutup', value: 'cancel' }]); return; }
+  const rows = res.rows;
+  if (!rows.length) { modal('Impor gagal', h('p', {}, 'Tidak ada baris data yang bisa dibaca dari file ini.'), [{ label: 'Tutup', value: 'cancel' }]); return; }
+  const imm = detectImm(rows), immNew = Object.entries(imm).filter(([id]) => !S.imm[id]?.done);
+  const nPhotos = rows.reduce((a, r) => a + r.photos.length, 0);
+  const existing = new Set(S.measurements.map(m => m.date)), dup = rows.filter(r => existing.has(r.date)).length;
+  const cM = h('input', { type: 'checkbox', checked: true }), cP = h('input', { type: 'checkbox', checked: nPhotos > 0, disabled: !nPhotos }), cI = h('input', { type: 'checkbox', checked: immNew.length > 0, disabled: !immNew.length });
+  const immName = id => IMM.find(v => v.id === id).n;
+  const body = h('div', { class: 'stack', style: 'gap:12px' },
+    h('p', { class: 'small muted' }, 'Sumber: ', res.source),
+    h('label', { class: 'row', style: 'gap:10px;align-items:flex-start' }, cM, h('span', {}, h('b', {}, `${rows.length} data kontrol`), h('span', { class: 'small muted', style: 'display:block' }, `${fmtDate(rows[0].date)} – ${fmtDate(rows.at(-1).date)} · tinggi, berat, lingkar kepala, suhu, lokasi & catatan` + (dup ? ` · ${dup} tanggal sudah ada akan digabung` : '')))),
+    h('label', { class: 'row', style: 'gap:10px;align-items:flex-start' }, cP, h('span', {}, h('b', {}, `${nPhotos} foto`), h('span', { class: 'small muted', style: 'display:block' }, nPhotos ? 'Ditautkan ke tanggal kontrolnya masing-masing, lalu dienkripsi' : (res.zip ? 'Tidak ada foto di kolom Foto' : 'CSV tidak memuat foto — impor file .xlsx untuk ikut membawa foto')))),
+    h('label', { class: 'row', style: 'gap:10px;align-items:flex-start' }, cI, h('span', {}, h('b', {}, `${immNew.length} imunisasi terdeteksi dari catatan`),
+      h('span', { class: 'small muted', style: 'display:block' }, immNew.length ? immNew.sort((a, b) => a[1] < b[1] ? -1 : 1).map(([id, d]) => `${immName(id)} (${fmtDate(d)})`).join(', ') : 'Tidak ada yang baru'))),
+    h('p', { class: 'tiny muted' }, 'Periksa kembali hasil impor di menu Pertumbuhan & Imunisasi. Imunisasi yang tidak tertulis di catatan (mis. HB-0 saat lahir) perlu dicentang manual.'));
+  if (await modal('Impor data historis', body, [{ label: 'Batal', value: 'cancel' }, { label: 'Impor & enkripsi', value: 'ok', cls: 'primary' }]) !== 'ok') return;
+  let nm = 0, np = 0;
+  toast('Mengimpor…');
+  for (const r of rows) {
+    let rec = S.measurements.find(m => m.date === r.date);
+    if (cM.checked) {
+      const fields = { height: r.height, weight: r.weight, head: r.head, temp: r.temp, place: r.place, note: r.note };
+      if (rec) { for (const [k, v] of Object.entries(fields)) if (v != null && v !== '' && (rec[k] == null || rec[k] === '' || (k === 'note' && rec.note === 'Data awal'))) rec[k] = v; }
+      else { rec = { id: uid(), date: r.date, ...fields }; S.measurements.push(rec); }
+      nm++;
+    }
+    if (cP.checked && res.zip) {
+      for (const path of r.photos) {
+        const src = 'import:' + path + '@' + r.date;
+        if (S.photos.some(p => p.src === src)) continue;
+        try {
+          const bytes = await res.zip.get(path); if (!bytes) continue;
+          const type = /\.png$/i.test(path) ? 'image/png' : /\.gif$/i.test(path) ? 'image/gif' : /\.webp$/i.test(path) ? 'image/webp' : 'image/jpeg';
+          await storePhoto(new Blob([bytes], { type }), { date: r.date, link: rec ? { type: 'm', id: rec.id } : null, caption: r.place ? 'Kontrol di ' + r.place : 'Kontrol ' + fmtDate(r.date), src });
+          np++;
+        } catch (e) { /* lewati gambar yang tidak bisa dibaca */ }
+      }
+    }
+  }
+  if (cI.checked) immNew.forEach(([id, d]) => { S.imm[id] = { done: true, date: d }; });
+  await save(); rerender();
+  toast(`Impor selesai: ${nm} kontrol, ${np} foto, ${cI.checked ? immNew.length : 0} imunisasi`);
+}
+
+// ---------- Pengaturan ----------
+function viewSettings() {
+  const c = S.child;
+  const nm = h('input', { type: 'text', required: true, value: c.name, maxlength: 60 });
+  const dob = h('input', { type: 'date', required: true, value: c.dob, max: toISO(today()) });
+  const sex = h('select', {}, h('option', { value: 'L', selected: c.sex === 'L' }, 'Laki-laki'), h('option', { value: 'P', selected: c.sex === 'P' }, 'Perempuan'));
+  const cf = h('form', { class: 'stack' }, h('div', { class: 'form-grid' }, field('Nama anak', nm), field('Tanggal lahir', dob), field('Jenis kelamin', sex)),
+    h('div', {}, h('button', { class: 'btn primary', type: 'submit' }, 'Simpan data anak')));
+  cf.addEventListener('submit', async e => { e.preventDefault(); Object.assign(S.child, { name: nm.value.trim(), dob: dob.value, sex: sex.value }); await save(); toast('Data anak diperbarui'); rerender(); });
+
+  const al = h('select', { style: 'width:auto', onchange: async e => { S.settings.autolock = +e.target.value; await save(); toast('Disimpan'); } },
+    [[5, '5 menit'], [10, '10 menit'], [15, '15 menit'], [30, '30 menit'], [0, 'Tidak pernah']].map(([v, l]) => h('option', { value: v, selected: S.settings.autolock === v }, l)));
+  const theme = h('select', { style: 'width:auto', onchange: e => { setTheme(e.target.value); } },
+    [['auto', 'Ikuti sistem'], ['light', 'Terang'], ['dark', 'Gelap']].map(([v, l]) => h('option', { value: v, selected: (document.documentElement.dataset.theme || 'auto') === v }, l)));
+
+  const o = h('input', { type: 'password', required: true, autocomplete: 'current-password' });
+  const n1 = h('input', { type: 'password', required: true, minlength: 8, autocomplete: 'new-password' });
+  const n2 = h('input', { type: 'password', required: true, minlength: 8, autocomplete: 'new-password' });
+  const pbtn = h('button', { class: 'btn', type: 'submit' }, 'Ganti kata sandi');
+  const pf = h('form', { class: 'stack' }, h('div', { class: 'form-grid' }, field('Kata sandi lama', o), field('Kata sandi baru', n1), field('Ulangi baru', n2)), h('div', {}, pbtn));
+  pf.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (n1.value !== n2.value) { toast('Kata sandi baru tidak sama'); return; }
+    pbtn.disabled = true; pbtn.textContent = 'Mengenkripsi ulang…';
+    try {
+      await saveChain;
+      const oldK = await deriveKey(o.value, META.salt, META.iter);
+      await Vault.load(oldK); // memastikan kata sandi lama benar
+      if (MODE.cloud) Vault.subscribe(onRemoteChange); // load() mengosongkan cache; langganan dipasang ulang di bawah
+    } catch { toast('Kata sandi lama salah'); pbtn.disabled = false; pbtn.textContent = 'Ganti kata sandi'; return; }
+    try {
+      const salt = crypto.getRandomValues(new Uint8Array(16)), newK = await deriveKey(n1.value, salt);
+      const st = JSON.parse(JSON.stringify(S));
+      const photos = await collectPhotos(st, (p, full) => Vault.getPhoto(KEY, p, full));
+      
+      const meta = { v: 1, salt, iter: ITER, kid: uid() };
+      META = meta;
+      await Vault.rebuild(newK, meta, st, photos);
+      KEY = newK; S = st; thumbURLs.forEach(u => URL.revokeObjectURL(u)); thumbURLs.clear();
+      if (MODE.cloud) Vault.subscribe(onRemoteChange);
+      toast(MODE.cloud ? 'Kata sandi keluarga diganti. Beri tahu anggota keluarga kata sandi barunya.' : 'Kata sandi diganti. Buat backup baru.'); rerender();
+    } catch (e2) { toast('Gagal mengganti kata sandi: ' + (e2.message || e2.code || e2)); pbtn.disabled = false; pbtn.textContent = 'Ganti kata sandi'; }
+  });
+
+  return h('div', { class: 'stack' },
+    h('section', { class: 'card' }, h('h3', {}, 'Data anak'), cf),
+    h('section', { class: 'card' }, h('h3', {}, 'Keamanan & tampilan'),
+      h('div', { class: 'list' },
+        h('div', { class: 'li' }, h('span', {}, 'Kunci otomatis jika tidak aktif'), al),
+        h('div', { class: 'li' }, h('span', {}, 'Tema'), theme),
+        h('div', { class: 'li' }, h('span', { class: 'small muted' }, 'Enkripsi'), h('span', { class: 'small' }, `AES-256-GCM · PBKDF2-SHA256 ${META.iter.toLocaleString('id-ID')} iterasi`))),
+      h('h4', { style: 'margin:16px 0 4px' }, 'Ganti kata sandi'), h('p', { class: 'tiny muted', style: 'margin:0 0 10px' }, 'Berlaku untuk perangkat ini. Data awal (baseline) tetap memakai kata sandi lama sampai Anda menggantinya dengan backup terbaru.'), pf),
+    h('section', { class: 'card' }, h('h3', {}, 'Tentang privasi'),
+      h('ul', { class: 'small', style: 'margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px' },
+        MODE.cloud ? [
+          h('li', {}, 'Brankas keluarga tersimpan online di halaman claude.ai ini dan tersinkron ke semua anggota keluarga yang diundang.'),
+          h('li', {}, 'Setiap catatan & foto dienkripsi AES-256 di browser sebelum dikirim. Server — termasuk Claude — hanya melihat sandi acak.'),
+          h('li', {}, 'Anggota keluarga butuh dua hal: undangan sebagai Editor di menu Share, dan kata sandi keluarga.'),
+          h('li', {}, 'Kata sandi tidak disimpan di mana pun. Jika lupa, data tidak bisa dibuka — rutin unduh backup terenkripsi.')
+        ] : [
+          h('li', {}, 'Data awal (riwayat Excel & foto) disimpan sebagai file terenkripsi: public/data/baseline.json. Tanpa kata sandi isinya tidak bisa dibaca.'),
+          h('li', {}, 'Saat pertama masuk di sebuah perangkat, data awal dibuka lalu disimpan di browser perangkat itu (IndexedDB), tetap terenkripsi.'),
+          h('li', {}, 'Catatan baru tersimpan di perangkat tempat Anda mencatat. Untuk memindahkannya: unduh backup, lalu pulihkan di perangkat lain atau jadikan baseline baru.'),
+          h('li', {}, 'Kata sandi tidak disimpan di mana pun. Jika lupa, data tidak bisa dibuka — rutin unduh backup terenkripsi.')
+        ])),
+    MODE.cloud && !MODE.isOwner ? null : h('section', { class: 'card' }, h('h3', { style: 'color:var(--bad)' }, 'Zona berbahaya'),
+      h('p', { class: 'small muted', style: 'margin-bottom:10px' }, MODE.cloud ? 'Menghapus seluruh brankas keluarga (data & foto) untuk semua anggota. Tidak bisa dibatalkan kecuali Anda punya backup.' : 'Menghapus data dan foto dari perangkat ini. Saat masuk lagi, aplikasi memuat ulang data awal (baseline); catatan yang belum di-backup akan hilang.'),
+      h('button', { class: 'btn danger', type: 'button', onclick: async () => {
+        const inp = h('input', { type: 'text', required: true, placeholder: 'HAPUS', pattern: 'HAPUS' });
+        const r = await modal('Hapus semua data?', h('div', { class: 'stack', style: 'gap:10px' }, h('p', {}, 'Ketik HAPUS untuk konfirmasi.'), inp), [{ label: 'Batal', value: 'cancel' }, { label: 'Hapus semua', value: 'ok', cls: 'danger' }]);
+        if (r !== 'ok' || inp.value !== 'HAPUS') return;
+        toast('Menghapus…');
+        try { await Vault.wipe(); } catch (e) { toast('Gagal menghapus: ' + (e.message || e.code || e)); return; }
+        KEY = null; S = null; META = null; timers.forEach(clearInterval); timers = []; BASE = null; renderLogin('Data perangkat ini dihapus. Masuk lagi untuk memuat data awal.');
+      } }, icon('trash', 18), 'Hapus semua data')));
+}
+function setTheme(v) {
+  try { if (v === 'auto') localStorage.removeItem('tk-theme'); else localStorage.setItem('tk-theme', v); } catch (e) {}
+  if (v === 'auto') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = v;
+}
+try { const th = localStorage.getItem('tk-theme'); if (th) document.documentElement.dataset.theme = th; } catch (e) {}
+
+// ---------- Mulai ----------
+(async function boot() {
+  let idbOk = false; try { idbOk = !!window.indexedDB; } catch (e) {}
+  const cryptoOk = !!(window.isSecureContext && window.crypto && window.crypto.subtle);
+  if (!idbOk || !cryptoOk) {
+    showGate(h('div', { class: 'card gate-card' }, brandEl(''),
+      h('div', { class: 'stack', style: 'gap:10px' },
+        h('p', {}, h('b', {}, 'Browser ini memblokir enkripsi atau penyimpanan.')),
+        h('p', { class: 'small muted' }, !cryptoOk ? 'Web Crypto tidak tersedia — buka lewat https:// atau http://localhost.' : 'Penyimpanan (IndexedDB) diblokir, misalnya di mode penyamaran.'),
+        h('p', { class: 'small' }, 'Gunakan Chrome, Edge, Firefox, atau Safari versi terbaru.'))));
+    return;
+  }
+  try { await DB.open(); META = await DB.get('meta'); }
+  catch (e) { showGate(h('div', { class: 'card gate-card' }, brandEl(''), h('p', {}, 'Penyimpanan tidak bisa dibuka: ' + e.message))); return; }
+  if (navigator.storage?.persist) navigator.storage.persist().catch(() => {});
+  renderLogin();
+})();
+
+</script>
+</body>
+</html>
