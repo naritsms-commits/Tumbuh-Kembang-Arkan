@@ -134,6 +134,14 @@ main{min-width:0;padding:26px clamp(16px,3vw,40px) 60px;max-width:1200px;width:1
 .chart .todaylab{fill:var(--primary);font-size:10.5px;font-weight:600}
 .chart .pline{fill:none;stroke:var(--pt);stroke-width:2.4;stroke-linejoin:round}
 .chart .pt{fill:var(--pt);stroke:var(--surface);stroke-width:2}
+.chart .ptlab{fill:var(--text);font-size:10.5px;font-weight:600;paint-order:stroke;stroke:var(--surface);stroke-width:3px}
+.chart-zoom{cursor:zoom-in;border-radius:10px;transition:box-shadow .15s}
+.chart-zoom:hover,.chart-zoom:focus-visible{box-shadow:0 0 0 2px var(--primary-soft);outline:none}
+.zoom-box{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;border:1px solid var(--border);border-radius:12px;padding:6px;background:var(--surface)}
+.zoom-box:active{cursor:grabbing}
+.zoom-box .chart{max-height:calc(100vh - 290px);min-height:220px;margin:0 auto}
+.zoom-box:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.zoom-info{min-height:1.4em;margin:0}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted);margin-top:8px}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px}
 .seg{display:inline-flex;background:var(--surface-2);border-radius:10px;padding:3px;gap:2px;flex-wrap:wrap}
@@ -208,6 +216,7 @@ details.stage.current{border-color:var(--primary);box-shadow:0 0 0 1px var(--pri
 /* Dialog / toast */
 dialog.modal{border:1px solid var(--border);border-radius:18px;padding:0;background:var(--surface);color:var(--text);width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 40px);box-shadow:0 20px 60px rgba(0,0,0,.25)}
 dialog.modal.wide{width:min(900px,calc(100vw - 32px))}
+dialog.modal.xl{width:min(1200px,calc(100vw - 16px))}
 dialog::backdrop{background:rgba(10,15,13,.5)}
 dialog form{display:flex;flex-direction:column;max-height:calc(100vh - 42px)}
 .m-head{padding:16px 20px;border-bottom:1px solid var(--border)}
@@ -543,7 +552,7 @@ const immDue = v => addMonths(parseISO(S.child.dob), v.m);
 const PHOTO_STAGES = [[0,1,'Bayi baru lahir (0–1 bulan)'],[1,3,'1–3 bulan'],[3,6,'3–6 bulan'],[6,9,'6–9 bulan'],[9,12,'9–12 bulan'],[12,18,'12–18 bulan'],[18,24,'18–24 bulan'],[24,36,'2–3 tahun'],[36,48,'3–4 tahun'],[48,60,'4–5 tahun'],[60,1e9,'5 tahun ke atas']];
 
 // ---------- State aplikasi ----------
-let KEY = null, S = null, META = null, TAB = 'dash', chartRange = 'focus', photoMode = 'tl', lastActivity = Date.now(), timers = [];
+let KEY = null, S = null, META = null, TAB = 'dash', photoMode = 'tl', lastActivity = Date.now(), timers = [];
 const thumbURLs = new Map();
 const openStages = new Set();
 function newState(child) {
@@ -577,7 +586,7 @@ function modal(title, body, buttons, opts = {}) {
       h('div', { class: 'm-head' }, h('h3', {}, title)),
       h('div', { class: 'm-body' }, body),
       h('div', { class: 'm-foot' }, buttons.map(b => h('button', { class: 'btn ' + (b.cls || '') + (b.left ? ' left' : ''), value: b.value, formnovalidate: b.novalidate || b.value === 'cancel' }, b.label))));
-    const dlg = h('dialog', { class: 'modal' + (opts.wide ? ' wide' : '') }, form);
+    const dlg = h('dialog', { class: 'modal' + (opts.wide ? ' wide' : '') + (opts.cls ? ' ' + opts.cls : '') }, form);
     dlg.addEventListener('close', () => { res(dlg.returnValue || 'cancel'); setTimeout(() => dlg.remove(), 0); });
     document.body.append(dlg); dlg.showModal();
   });
@@ -840,7 +849,7 @@ function viewDash() {
 
   const chartCard = h('section', { class: 'card' },
     h('div', { class: 'card-head' }, h('h3', {}, 'Tinggi badan menurut umur'), h('button', { class: 'btn sm ghost', type: 'button', onclick: () => go('growth') }, 'Lihat semua grafik →')),
-    h('div', { html: growthChartSVG('h', 'focus', { compact: true }) }), chartLegend());
+    chartThumb('h', { compact: true }), chartLegend());
 
   const photos = [...S.photos].sort((a, b) => a.date < b.date ? 1 : -1).slice(0, 4);
   const photoCard = h('section', { class: 'card' },
@@ -873,7 +882,8 @@ function growthChartSVG(kind, range, opt = {}) {
   let m0 = 0, m1 = 60;
   if (range === 'focus') { m0 = Math.max(0, Math.floor((nowM - 12) / 3) * 3); m1 = Math.min(60, Math.ceil((nowM + 6) / 3) * 3); if (m1 - m0 < 12) m0 = Math.max(0, m1 - 12); }
   else if (range === '0-24') m1 = 24;
-  else if (range === 'report') m1 = Math.min(60, Math.max(24, Math.ceil((nowM + 6) / 6) * 6));
+  else if (range === 'report' || range === 'full') m1 = Math.min(60, Math.max(24, Math.ceil((nowM + 6) / 6) * 6));
+  if (opt.win) [m0, m1] = opt.win;
   const f = ref[kind];
   const N = 90;
   let lo = Infinity, hi = -Infinity;
@@ -888,16 +898,122 @@ function growthChartSVG(kind, range, opt = {}) {
   const band = (z1, z2, cls) => `<path class="${cls}" d="${P(curve(z1))}${curve(z2).reverse().map(p => 'L' + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('')}Z"/>`;
   let s = `<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="Grafik ${KIND[kind].name.toLowerCase()} menurut umur, ${pts.length} titik data">`;
   for (let v = lo; v <= hi + 1e-9; v += ys) s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text class="tick" x="${L - 6}" y="${(Y(v) + 4).toFixed(1)}" text-anchor="end">${fmtNum(v)}</text>`;
-  const xs = (m1 - m0) <= 24 ? 3 : 6;
+  const xs = (m1 - m0) <= 8 ? 1 : (m1 - m0) <= 24 ? 3 : 6;
   for (let m = Math.ceil(m0 / xs) * xs; m <= m1; m += xs) s += `<line class="grid" x1="${X(m).toFixed(1)}" x2="${X(m).toFixed(1)}" y1="${T}" y2="${H - B}"/><text class="tick" x="${X(m).toFixed(1)}" y="${H - B + 15}" text-anchor="middle">${m}</text>`;
   s += band(-3, -2, 'band-warn') + band(-2, 2, 'band-ok') + band(2, 3, 'band-warn');
   [[-3, 'z3'], [-2, 'z2'], [0, 'z0'], [2, 'z2'], [3, 'z3']].forEach(([z, c]) => { const a = curve(z); s += `<path class="zl ${c}" d="${P(a)}"/><text class="zlab" x="${W - R + 4}" y="${(a[a.length - 1][1] + 4).toFixed(1)}">${z > 0 ? '+' + z : z === 0 ? '0' : '−' + (-z)}</text>`; });
   if (nowM >= m0 && nowM <= m1 && !opt.noToday) s += `<line class="today" x1="${X(nowM).toFixed(1)}" x2="${X(nowM).toFixed(1)}" y1="${T}" y2="${H - B}"/><text class="todaylab" x="${X(nowM).toFixed(1)}" y="${T - 6}" text-anchor="middle">Hari ini</text>`;
   const vis = pts.filter(p => p.m >= m0 - 0.01 && p.m <= m1 + 0.01);
   if (vis.length > 1) s += `<path class="pline" d="${P(vis.map(p => [X(p.m), Y(p.v)]))}"/>`;
-  vis.forEach(p => { s += `<circle class="pt" cx="${X(p.m).toFixed(1)}" cy="${Y(p.v).toFixed(1)}" r="5"><title>${fmtDate(p.d)} · ${fmtNum(p.v, 2)} ${unit}</title></circle>`; });
+  const lbl = opt.big && (m1 - m0) <= 15;
+  vis.forEach(p => {
+    s += `<circle class="pt" cx="${X(p.m).toFixed(1)}" cy="${Y(p.v).toFixed(1)}" r="${opt.big ? 6 : 5}" data-d="${p.d}" data-v="${p.v}"><title>${fmtDate(p.d)} · ${fmtNum(p.v, 2)} ${unit}</title></circle>`;
+    if (lbl) s += `<text class="ptlab" x="${X(p.m).toFixed(1)}" y="${(Y(p.v) - 10).toFixed(1)}" text-anchor="middle">${fmtNum(p.v, 2)}</text>`;
+  });
   s += `<text class="axl" x="4" y="13">${unit}</text><text class="axl" x="${(L + W - R) / 2}" y="${H - 6}" text-anchor="middle">Usia (bulan)</text></svg>`;
   return s;
+}
+
+// Rentang grafik bawaan: dari lahir sampai ~6 bulan setelah usia kini (min. 0–24 bln, maks. 0–60 bln)
+function fullWin() {
+  const nowM = Math.min(60, Math.max(0, ageMonths(parseISO(S.child.dob), today())));
+  return [0, Math.min(60, Math.max(24, Math.ceil((nowM + 6) / 6) * 6))];
+}
+// Grafik yang bisa diklik untuk dibuka besar
+function chartThumb(kind, opt = {}) {
+  return h('div', { class: 'chart-zoom', role: 'button', tabindex: 0, title: 'Klik untuk memperbesar', 'aria-label': `Perbesar grafik ${KIND[kind].name.toLowerCase()}`,
+    onclick: () => openChart(kind), onkeydown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openChart(kind); } },
+    html: growthChartSVG(kind, 'full', opt) });
+}
+// Popup grafik besar: gulir/cubit untuk zoom, seret untuk menggeser, klik titik untuk melihat nilainya
+function openChart(kind) {
+  const PL = 42, PR = 34, VW = 640; // harus sama dengan tata letak di growthChartSVG
+  let k = kind, win = fullWin(), raf = 0;
+  const hint = 'Gulir mouse atau cubit dua jari untuk zoom · seret untuk menggeser · klik titik untuk melihat nilainya';
+  const box = h('div', { class: 'zoom-box', tabindex: 0, 'aria-label': 'Grafik besar. Tombol + dan − untuk zoom, panah kiri/kanan untuk menggeser.' });
+  const info = h('p', { class: 'small muted zoom-info', 'aria-live': 'polite' }, hint);
+  const range = h('span', { class: 'tiny muted' });
+  const tabs = h('div', { class: 'seg', role: 'group', 'aria-label': 'Jenis grafik' },
+    ['h', 'w', 'c'].map(x => h('button', { type: 'button', 'data-k': x, onclick: () => { k = x; info.textContent = hint; draw(); } }, KIND[x].name)));
+  const clampWin = (a, b) => {
+    const span = Math.min(60, Math.max(3, b - a));
+    let s = Math.max(0, a); if (s + span > 60) s = 60 - span;
+    return [s, s + span];
+  };
+  const draw = () => {
+    box.innerHTML = growthChartSVG(k, 'full', { win, big: true });
+    tabs.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.k === k)));
+    range.textContent = `Usia ${fmtNum(win[0], 1)}–${fmtNum(win[1], 1)} bulan`;
+  };
+  const redraw = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; draw(); }); };
+  const svgRect = () => (box.querySelector('svg') || box).getBoundingClientRect();
+  const fracAt = clientX => {
+    const r = svgRect(), vx = (clientX - r.left) / r.width * VW;
+    return Math.min(1, Math.max(0, (vx - PL) / (VW - PL - PR)));
+  };
+  const zoomAt = (factor, frac = 0.5, base = win) => {
+    const c = base[0] + (base[1] - base[0]) * frac, span = (base[1] - base[0]) * factor;
+    win = clampWin(c - span * frac, c - span * frac + span); redraw();
+  };
+  const monthsPerPx = base => (base[1] - base[0]) / (svgRect().width * (VW - PL - PR) / VW);
+
+  box.addEventListener('wheel', e => { e.preventDefault(); zoomAt(e.deltaY > 0 ? 1.15 : 1 / 1.15, fracAt(e.clientX)); }, { passive: false });
+  box.addEventListener('dblclick', () => { win = fullWin(); redraw(); });
+  box.addEventListener('keydown', e => {
+    const step = (win[1] - win[0]) * 0.15;
+    if (e.key === '+' || e.key === '=') zoomAt(1 / 1.3);
+    else if (e.key === '-') zoomAt(1.3);
+    else if (e.key === 'ArrowLeft') { win = clampWin(win[0] - step, win[1] - step); redraw(); }
+    else if (e.key === 'ArrowRight') { win = clampWin(win[0] + step, win[1] + step); redraw(); }
+    else return;
+    e.preventDefault();
+  });
+  // Seret (1 jari / mouse) dan cubit (2 jari)
+  const ptrs = new Map(); let start = null;
+  const snap = () => ({ win: [...win], ptrs: new Map([...ptrs].map(([id, p]) => [id, { ...p }])), moved: start?.moved || false });
+  box.addEventListener('pointerdown', e => { try { box.setPointerCapture(e.pointerId); } catch (_) {} ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY }); start = snap(); });
+  box.addEventListener('pointermove', e => {
+    if (!ptrs.has(e.pointerId) || !start) return;
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const now = [...ptrs.values()], was = [...start.ptrs.values()];
+    if (now.length === 1 && was.length === 1) {
+      const dx = now[0].x - was[0].x;
+      if (Math.abs(dx) > 4) start.moved = true;
+      if (!start.moved) return;
+      const d = dx * monthsPerPx(start.win);
+      win = clampWin(start.win[0] - d, start.win[1] - d); redraw();
+    } else if (now.length >= 2 && was.length >= 2) {
+      const dist = a => Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y) || 1;
+      start.moved = true;
+      zoomAt(dist(was) / dist(now), fracAt((was[0].x + was[1].x) / 2), start.win);
+    }
+  });
+  const end = e => {
+    if (!ptrs.has(e.pointerId)) return;
+    const tap = e.type === 'pointerup' && ptrs.size === 1 && start && !start.moved;
+    ptrs.delete(e.pointerId);
+    start = ptrs.size ? snap() : null;
+    if (!tap) return;
+    // titik terdekat dalam radius 24 px (titik kecil sulit diketuk tepat di HP)
+    let c = null, best = 24;
+    box.querySelectorAll('circle.pt').forEach(el => {
+      const r = el.getBoundingClientRect(), d = Math.hypot(r.left + r.width / 2 - e.clientX, r.top + r.height / 2 - e.clientY);
+      if (d < best) { best = d; c = el; }
+    });
+    if (c) info.textContent = `${fmtDate(c.dataset.d)} · usia ${ageText(parseISO(S.child.dob), parseISO(c.dataset.d))} · ${KIND[k].name}: ${fmtNum(+c.dataset.v, 2)} ${KIND[k].unit}`;
+  };
+  box.addEventListener('pointerup', end); box.addEventListener('pointercancel', end);
+
+  const ctl = (label, aria, fn) => h('button', { class: 'btn sm', type: 'button', 'aria-label': aria, onclick: fn }, label);
+  const body = h('div', { class: 'stack', style: 'gap:10px' },
+    h('div', { class: 'spread', style: 'flex-wrap:wrap;gap:8px' }, tabs,
+      h('div', { class: 'row', style: 'gap:6px' }, range,
+        ctl('−', 'Perkecil', () => zoomAt(1.3)), ctl('+', 'Perbesar', () => zoomAt(1 / 1.3)),
+        ctl('Atur ulang', 'Kembali ke rentang awal', () => { win = fullWin(); redraw(); }))),
+    box, info, chartLegend());
+  draw();
+  modal('Grafik pertumbuhan (standar WHO)', body, [{ label: 'Tutup', value: 'cancel' }], { cls: 'xl' });
+  setTimeout(() => box.focus({ preventScroll: true }), 50);
 }
 
 // ---------- Pertumbuhan ----------
@@ -926,12 +1042,10 @@ function viewGrowth() {
     await save(); toast('Pengukuran tersimpan'); rerender();
   });
 
-  const seg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Rentang grafik' },
-    [['focus', 'Sekitar usia kini'], ['0-24', '0–2 tahun'], ['all', '0–5 tahun']].map(([k, l]) => h('button', { type: 'button', 'aria-pressed': String(chartRange === k), onclick: () => { chartRange = k; rerender(); } }, l)));
   const charts = h('section', { class: 'card' },
-    h('div', { class: 'card-head' }, h('h3', { style: 'margin:0' }, 'Grafik pertumbuhan (standar WHO)'), seg),
+    h('div', { class: 'card-head' }, h('h3', { style: 'margin:0' }, 'Grafik pertumbuhan (standar WHO)'), h('span', { class: 'tiny muted' }, 'Klik grafik untuk memperbesar & zoom')),
     h('div', { class: 'chart-grid' }, ['h', 'w', 'c'].map(k =>
-      h('div', {}, h('h4', { class: 'small', style: 'margin-bottom:6px' }, `${KIND[k].name} menurut umur (${KIND[k].abbr})`), h('div', { html: growthChartSVG(k, chartRange) })))),
+      h('div', {}, h('h4', { class: 'small', style: 'margin-bottom:6px' }, `${KIND[k].name} menurut umur (${KIND[k].abbr})`), chartThumb(k)))),
     chartLegend(),
     h('p', { class: 'tiny muted', style: 'margin-top:8px' }, 'Garis ±2/±3 = simpangan baku (SD) dari median WHO Child Growth Standards. Nilai merupakan pendekatan interpolasi; untuk keputusan medis gunakan penilaian dokter / KMS.'));
 
